@@ -1,4 +1,3 @@
-import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -7,19 +6,28 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import { useState } from "react";
+import logo from "/nexgenlogo.png";
 
 function Navbar() {
-  const { user } = useAuth();
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const settings = ["Profile", "Account", "Dashboard", "Logout"];
+  const { user, logOut } = useAuth();
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
+  const navigate = useNavigate();
+  const handleLogOut = () => {
+    logOut();
+    navigate("/");
+  };
+  const settings = [
+    { name: "Profile", link: "/profile" },
+    { name: "Account", link: "/account" },
+    { name: "Dashboard", link: "/dashboard" },
+  ];
   const pages = [
     { name: "Home", link: "/" },
     { name: "All Tests", link: "/allTests" },
@@ -42,83 +50,7 @@ function Navbar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-  //#E9FBF3
-  // const navLinks = (
-  //   <ul>
-  //     <li>
-  //       <NavLink
-  //         to="/"
-  //         sx={(theme) => ({
-  //           display: "block",
-  //           padding: "8px 16px",
-  //           textDecoration: "none",
-  //           color: theme.palette.primary.main, // Replace with your primary color
-  //           "&:hover": {
-  //             color: theme.palette.secondary.main, // Replace with your secondary color
-  //           },
-  //           "&.active": {
-  //             display: "block",
-  //             padding: "8px 16px",
-  //             backgroundColor: "transparent",
-  //             textDecoration: "none",
-  //             color: theme.palette.secondary.main, // Replace with your secondary color
-  //           },
-  //         })}
-  //         activeClassName="active"
-  //       >
-  //         Home
-  //       </NavLink>
-  //     </li>
-  //     <li>
-  //       <NavLink
-  //         to="/allJobs"
-  //         sx={(theme) => ({
-  //           display: "block",
-  //           padding: "8px 16px",
-  //           textDecoration: "none",
-  //           color: theme.palette.primary.main, // Replace with your primary color
-  //           "&:hover": {
-  //             color: theme.palette.secondary.main, // Replace with your secondary color
-  //           },
-  //           "&.active": {
-  //             display: "block",
-  //             padding: "8px 16px",
-  //             backgroundColor: "transparent",
-  //             textDecoration: "none",
-  //             color: theme.palette.secondary.main, // Replace with your secondary color
-  //           },
-  //         })}
-  //         activeClassName="active"
-  //       >
-  //         All Jobs
-  //       </NavLink>
-  //     </li>
-  //     <li>
-  //       <NavLink
-  //         to="/blogs"
-  //         sx={(theme) => ({
-  //           display: "block",
-  //           padding: "8px 16px",
-  //           textDecoration: "none",
-  //           color: theme.palette.primary.main, // Replace with your primary color
-  //           "&:hover": {
-  //             color: theme.palette.secondary.main, // Replace with your secondary color
-  //           },
-  //           "&.active": {
-  //             display: "block",
-  //             padding: "8px 16px",
-  //             backgroundColor: "transparent",
-  //             textDecoration: "none",
-  //             color: theme.palette.secondary.main, // Replace with your secondary color
-  //           },
-  //         })}
-  //         activeClassName="active"
-  //       >
-  //         Blogs
-  //       </NavLink>
-  //     </li>
-  //   </ul>
-  // );
+
   return (
     <AppBar position="sticky" sx={{ backgroundColor: "#75E7B6" }}>
       <Container maxWidth="xl">
@@ -126,11 +58,13 @@ function Navbar() {
           disableGutters
           sx={{
             display: "flex",
-            justifyContent: "space-between",
+            justifyContent: "flex-end",
             alignItems: "center",
           }}
         >
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+          <Box sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}>
+            <img style={{ height: "40px" }} src={logo} alt="" />
+          </Box>
           <Typography
             variant="h6"
             noWrap
@@ -156,7 +90,7 @@ function Navbar() {
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
-              color="inherit"
+              color="#12352B"
             >
               <MenuIcon />
             </IconButton>
@@ -189,18 +123,16 @@ function Navbar() {
                     key={page.name}
                     to={page.link}
                   >
-                    <Typography
-                      sx={{ textDecoration: "none", color: "inherit" }}
-                      textAlign="center"
-                    >
-                      {page.name}
-                    </Typography>
+                    {page.name}
                   </NavLink>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
+
+          <Box sx={{ display: { xs: "flex", md: "none" }, mr: 1 }}>
+            <img style={{ height: "40px" }} src={logo} alt="" />
+          </Box>
           <Typography
             variant="h5"
             noWrap
@@ -211,50 +143,73 @@ function Navbar() {
               display: { xs: "flex", md: "none" },
               flexGrow: 1,
               fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
+              fontWeight: 900,
+              color: "#082f63",
               textDecoration: "none",
+              fontSize: "24px",
             }}
           >
-            LOGO
+            NexGen Diagnosia
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: { xs: "none", md: "flex" },
+              justifyContent: "center",
+              gap: "20px",
+            }}
+          >
             {pages.map((page) => (
               <Button
                 key={page.name}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
+                sx={{
+                  my: 2,
+                  color: "#082f63",
+                  display: "block",
+                  "&.active": {
+                    color: "#0f64d6",
+                    fontWeight: 600,
+                  },
+                }}
+                component={NavLink}
+                to={page.link}
               >
-                <Typography
-                  sx={{ textDecoration: "none", color: "inherit" }}
-                  textAlign="center"
-                >
-                  <NavLink
-                    style={{
-                      color: "#12352B",
-                      textDecoration: "none",
-                      fontWeight: "600",
-                    }}
-                    key={page.name}
-                    to={page.link}
-                  >
-                    {page.name}
-                  </NavLink>
-                </Typography>
+                {page.name}
               </Button>
             ))}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
             {user ? (
-              <>
-                {" "}
+              <Box sx={{ display: "flex", alignItems: "center" }}>
+                <Typography
+                  variant="h6"
+                  noWrap
+                  component="a"
+                  href="#app-bar-with-responsive-menu"
+                  sx={{
+                    mr: 2,
+                    display: { xs: "none", md: "flex" },
+                    fontFamily: "monospace",
+                    fontWeight: 900,
+                    color: "#082f63",
+                    textDecoration: "none",
+                    fontSize: "18px",
+                  }}
+                >
+                  {user.displayName}
+                </Typography>
                 <Tooltip title="Open settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar
-                      alt="Remy Sharp"
-                      src="/static/images/avatar/2.jpg"
+                    <img
+                      style={{
+                        height: "50px",
+                        width: "50px",
+                        borderRadius: "50%",
+                      }}
+                      src={user.photoURL}
+                      alt=""
                     />
                   </IconButton>
                 </Tooltip>
@@ -275,12 +230,35 @@ function Navbar() {
                   onClose={handleCloseUserMenu}
                 >
                   {settings.map((setting) => (
-                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                      <Typography textAlign="center">{setting}</Typography>
+                    <MenuItem key={setting.name} onClick={handleCloseUserMenu}>
+                      <Typography textAlign="center">
+                        <NavLink
+                          to={setting.link}
+                          style={{
+                            fontWeight: "600",
+                            color: "#082f63",
+                            textDecoration: "none",
+                          }}
+                        >
+                          {setting.name}
+                        </NavLink>
+                      </Typography>
                     </MenuItem>
                   ))}
+                  <Typography textAlign="center">
+                    <Button
+                      onClick={handleLogOut}
+                      style={{
+                        backgroundColor: "#082f63",
+                        fontWeight: 600,
+                        color: "#75E7B6",
+                      }}
+                    >
+                      Logout
+                    </Button>
+                  </Typography>
                 </Menu>
-              </>
+              </Box>
             ) : (
               <Button style={{ backgroundColor: "#082f63" }}>
                 <Link

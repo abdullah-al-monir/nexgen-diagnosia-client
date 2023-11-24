@@ -1,4 +1,4 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 // import Swal from "sweetalert2";
 // import useDocumentTitle from "../../hooks/useTitle";
 import Button from "@mui/material/Button";
@@ -61,58 +61,75 @@ const Register = () => {
 
   const handleRegister = (e) => {
     e.preventDefault();
-    const data = new FormData(e.currentTarget);
+    let data = new FormData(e.target);
     const name = data.get("name");
     const email = data.get("email");
     const password = data.get("password");
     const confirmPassword = data.get("confirmPassword");
-    const photo = data.get("photo");
-    console.log(photo);
+
+    console.log(name, email, password);
+    if (
+      name === "" ||
+      email === "" ||
+      password === "" ||
+      confirmPassword === "" ||
+      upazila === "" ||
+      district === "" ||
+      bloodGroup === ""
+    ) {
+      return setError("Please fill all the field");
+    }
+
     if (password !== confirmPassword) {
       return setError("Password don't match");
     }
     createUser(email, password).then((result) => {
       const loggedUser = result.user;
       console.log(loggedUser);
-      const imageFile = photo;
-      const res = axiosPublic.post(dp_hosting_api, imageFile, {
-        headers: {
-          "content-type": "multipart/form-data",
-        },
-      });
-      console.log(res);
-      if (res.data.success) {
-        const dp = res.data.data.display_url;
-        updateUserProfile(name, dp)
-          .then(() => {
-            const userInfo = {
-              name,
-              email,
-              dp,
-              bloodGroup,
-              district,
-              upazila,
-            };
-            console.log(userInfo);
-            // axiosPublic.post("/users", userInfo).then((res) => {
-            //   if (res.data.insertedId) {
-            //     console.log("user added to the database");
-            //     // Swal.fire({
-            //     //   position: "top-end",
-            //     //   icon: "success",
-            //     //   title: "User created successfully.",
-            //     //   showConfirmButton: false,
-            //     //   timer: 1500,
-            //     // });
-            //     navigate("/");
-            //   }
-            // });
-          })
-          .catch((error) => {
-            console.log(error);
-            setError("Something went wrong");
-          });
-      }
+      const imageFile = { image: data.get("photo") };
+
+      axiosPublic
+        .post(dp_hosting_api, imageFile, {
+          headers: {
+            "content-type": "multipart/form-data",
+          },
+        })
+        .then((res) => {
+          if (res.data.success) {
+            const dp = res.data.data.display_url;
+            updateUserProfile(name, dp)
+              .then(() => {
+                const userInfo = {
+                  name,
+                  email,
+                  dp,
+                  bloodGroup,
+                  district,
+                  upazila,
+                  status: "active",
+                };
+                console.log(userInfo);
+                axiosPublic.post("/users", userInfo).then((res) => {
+                  if (res.data.insertedId) {
+                    console.log("user added to the database");
+                    // Swal.fire({
+                    //   position: "top-end",
+                    //   icon: "success",
+                    //   title: "User created successfully.",
+                    //   showConfirmButton: false,
+                    //   timer: 1500,
+                    // });
+                    navigate("/");
+                    data = new FormData();
+                  }
+                });
+              })
+              .catch((error) => {
+                console.log(error);
+                setError("Something went wrong");
+              });
+          }
+        });
     });
   };
   const handleGoogleLogin = () => {
@@ -195,7 +212,6 @@ const Register = () => {
                 id="name"
                 label="Your Name"
                 name="name"
-                autoComplete="name"
                 size="small"
                 autoFocus
                 sx={{
@@ -214,7 +230,6 @@ const Register = () => {
                 id="email"
                 label="Email Address"
                 name="email"
-                autoComplete="email"
                 size="small"
                 autoFocus
                 sx={{
@@ -248,8 +263,9 @@ const Register = () => {
                   width: { xs: "100%", md: "50%" },
                 }}
               >
-                <InputLabel required>District</InputLabel>
+                <InputLabel>District</InputLabel>
                 <Select
+                  required
                   value={district.name}
                   label="District"
                   onChange={handleSelectDistrict}

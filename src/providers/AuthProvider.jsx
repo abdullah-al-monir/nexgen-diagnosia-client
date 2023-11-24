@@ -8,8 +8,9 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  updateProfile,
 } from "firebase/auth";
-import axios from "axios";
+import useAxiosPublic from "../hooks/useAxiosPublic";
 
 export const AuthContext = createContext(null);
 const auth = getAuth(app);
@@ -17,7 +18,7 @@ const googleProvider = new GoogleAuthProvider();
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-
+  const axiosPublic = useAxiosPublic();
   const createUser = (email, password) => {
     setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
@@ -34,36 +35,41 @@ const AuthProvider = ({ children }) => {
     setLoading(true);
     return signOut(auth);
   };
+  const updateUserProfile = (name, photo) => {
+    return updateProfile(auth.currentUser, {
+      displayName: name,
+      photoURL: photo,
+    });
+  };
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      // const userEmail = currentUser?.email || user?.email;
-      // const loggedUser = { email: userEmail };
-      // if (currentUser) {
-      //   axios
-      //     .post("https://work-atlas-server.vercel.app/jwt", loggedUser, {
-      //       withCredentials: true,
-      //     })
-      //     .then((res) => {
-      //       if (res.data) {
-      //         setLoading(false);
-      //       }
+      const userEmail = currentUser?.email || user?.email;
+      const loggedUser = { email: userEmail };
+      if (currentUser) {
+        axiosPublic
+          .post("/jwt", loggedUser, {
+            withCredentials: true,
+          })
+          .then((res) => {
+            if (res.data) {
+              setLoading(false);
+            }
 
-      //       console.log("token response", res.data);
-      //     });
-      // } else {
-      //   axios
-      //     .post("https://work-atlas-server.vercel.app/logout", loggedUser, {
-      //       withCredentials: true,
-      //     })
-      //     .then((res) => {
-      //       if (res.data) {
-      //         setLoading(false);
-      //       }
-      //       console.log(res.data);
-      //     });
-      // }
-      setLoading(false);
+            console.log("token response", res.data);
+          });
+      } else {
+        axiosPublic
+          .post("/logout", loggedUser, {
+            withCredentials: true,
+          })
+          .then((res) => {
+            if (res.data) {
+              setLoading(false);
+            }
+            console.log(res.data);
+          });
+      }
     });
     return () => {
       return unsubscribe();
@@ -76,6 +82,7 @@ const AuthProvider = ({ children }) => {
     signIn,
     googleSignIn,
     logOut,
+    updateUserProfile,
     loading,
     setLoading,
   };
