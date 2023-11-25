@@ -19,7 +19,7 @@ export const MainListItems = () => {
   const [admin] = useAdmin();
   return (
     <>
-      {user && !admin && (
+      {user &&  (
         <>
           <ListItemButton
             sx={{

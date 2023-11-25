@@ -4,10 +4,17 @@ import Footer from "../pages/shared/Footer";
 
 const MainLayout = () => {
   return (
-    <div>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        minHeight: "100vh"
+      }}
+    >
       <Navbar />
-      <div style={{minHeight : "calc(100vh - 176.5px)"}}>
-      <Outlet />
+      <div >
+        <Outlet />
       </div>
       <Footer />
     </div>

@@ -1,15 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "./useAxiosPublic";
-const useUpazila = () => {
+const useBanners = () => {
   const axiosPublic = useAxiosPublic();
-  const { data: upazilas = [] } = useQuery({
-    queryKey: ["upazilas"],
+  const { data: banners = [] } = useQuery({
+    queryKey: ["banners"],
     queryFn: async () => {
-      const res = await axiosPublic(`/upazilas`);
+      const res = await axiosPublic.get(`/banners`);
       return res.data;
     },
   });
-  return [upazilas];
+  return [banners];
 };
 
-export default useUpazila;
+export default useBanners;

@@ -1,8 +1,11 @@
-import Container from "@mui/material/Container";
+
+import Banner from "../Banner/Banner";
+
 const Home = () => {
   return (
     <div>
-      <Container>This is home</Container>
+      
+      <Banner />
     </div>
   );
 };

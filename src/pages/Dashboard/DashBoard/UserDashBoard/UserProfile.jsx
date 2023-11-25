@@ -37,13 +37,11 @@ const UserProfile = () => {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const [divisions] = useDivision();
-  const [districts] = useDistrict();
-  const [upazilas] = useUpazila();
   const [changeBloodGroup, setBloodGroup] = useState(bloodGroup);
   const [changeDivision, setDivision] = useState(division);
-
+  const [districts] = useDistrict();
   const [changeDistrict, setDistrict] = useState(district);
-
+  const [upazilas] = useUpazila();
   const [changeUpazila, setUpazila] = useState(upazila);
 
   const handleSelectBloodGroup = (event) => {
@@ -167,6 +165,7 @@ const UserProfile = () => {
       sx={{
         display: "flex",
         alignItems: "center",
+        justifyContent: "center",
         minHeight: "calc(100vh - 155px)",
         backgroundColor: "white",
         padding: "10px 10px 10px 50px",
@@ -174,7 +173,7 @@ const UserProfile = () => {
     >
       <form onSubmit={handleSaveProfileInfo}>
         {" "}
-        <Grid sx={{ width: { md: "800px" }, margin: "0px auto" }}>
+        <Grid sx={{ width: { lg: "800px", md: "600px" }, margin: "0px auto" }}>
           <Grid
             sx={{
               display: "flex",
