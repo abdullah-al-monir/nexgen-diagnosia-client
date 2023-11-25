@@ -29,7 +29,7 @@ function Copyright(props) {
 }
 
 const Login = () => {
-  const { googleSignIn, signIn } = useAuth();
+  const {  signIn } = useAuth();
   // const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
@@ -51,18 +51,18 @@ const Login = () => {
       })
       .catch(() => setError("Invalid email or password"));
   };
-  const handleGoogleLogin = () => {
-    googleSignIn()
-      .then(() => {
-        navigate(location?.state ? location.state : "/");
-        // Swal.fire(
-        //   "Success!",
-        //   "User logged in successfully using Google.",
-        //   "success"
-        // );
-      })
-      .catch(() => setError("Sorry! Something went wrong"));
-  };
+  // const handleGoogleLogin = () => {
+  //   googleSignIn()
+  //     .then(() => {
+  //       navigate(location?.state ? location.state : "/");
+  //       Swal.fire(
+  //         "Success!",
+  //         "User logged in successfully using Google.",
+  //         "success"
+  //       );
+  //     })
+  //     .catch(() => setError("Sorry! Something went wrong"));
+  // };
   return (
     <Box
       sx={{
@@ -195,7 +195,7 @@ const Login = () => {
               </Grid>
             </Grid>
 
-            <hr />
+            {/* <hr />
             <Typography sx={{ fontSize: "15px", textAlign: "center" }}>
               Continue with
             </Typography>
@@ -213,7 +213,7 @@ const Login = () => {
             >
               <GoogleIcon sx={{ mr: 1, color: "#75E7B6", fontSize: "18px" }} />{" "}
               <Typography>Google</Typography>
-            </Button>
+            </Button> */}
           </Box>
           <Copyright sx={{ mt: 5, mb: 4 }} />
         </Box>

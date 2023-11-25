@@ -62,14 +62,17 @@ const Dashboard = () => {
         maxWidth: "1280px",
         margin: "0px auto",
         position: "relative",
-        height : "100%",
-        border : "1px solid black"
+        height: "100%",
       }}
     >
       <CssBaseline />
       <Drawer
         variant="permanent"
-        sx={{ position: { xs: "absolute", md: "static" }, height: "100%" }}
+        sx={{
+          position: { xs: "absolute", md: "static" },
+          minHeight: "100vh",
+          backgroundColor: "#75E7B6",
+        }}
         open={open}
       >
         <Toolbar
@@ -78,6 +81,7 @@ const Dashboard = () => {
             alignItems: "center",
             justifyContent: "flex-end",
             px: [1],
+            backgroundColor: "#75E7B6",
           }}
         >
           {open && (
@@ -99,16 +103,17 @@ const Dashboard = () => {
       <Box
         component="main"
         sx={{
-          backgroundColor: (theme) =>
-            theme.palette.mode === "light"
-              ? theme.palette.grey[100]
-              : theme.palette.grey[900],
           flexGrow: 1,
           height: "100vh",
           overflow: "auto",
         }}
       >
-        <Grid container justifyContent="center" my="20px">
+        <Grid
+          container
+          justifyContent="center"
+          py="9px"
+          backgroundColor="#75E7B6"
+        >
           <Box sx={{ mr: 1 }}>
             <img style={{ height: "40px" }} src={logo} alt="" />
           </Box>
@@ -130,7 +135,16 @@ const Dashboard = () => {
           </Typography>
         </Grid>
 
-        <Container maxWidth="lg" sx={{ mt: 4, mb: 4, ml: { xs: 8, md: 0 } , }}>
+        <Container
+          maxWidth="lg"
+          sx={{
+            pt: 4,
+            pb: 4,
+            pl: { xs: 8, md: 0 },
+            minHeight: "calc(100vh - 88px)",
+            backgroundColor: "green",
+          }}
+        >
           <Outlet />
         </Container>
       </Box>

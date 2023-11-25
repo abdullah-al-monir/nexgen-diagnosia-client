@@ -1,28 +1,25 @@
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // import Swal from "sweetalert2";
 // import useDocumentTitle from "../../hooks/useTitle";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import loginbg from "../../assets/loginbg.jpg";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { CheckBox } from "@mui/icons-material";
-import GoogleIcon from "@mui/icons-material/Google";
 import logo from "/nexgenlogo.png";
 import useAuth from "../../hooks/useAuth";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { useState } from "react";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
-
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import useUpazila from "../../hooks/useUpazila";
 import useDistrict from "../../hooks/useDistrict";
+import useDivision from "../../hooks/useDivision";
 function Copyright(props) {
   return (
     <Typography variant="body2" color="gray" align="center" {...props}>
@@ -39,21 +36,25 @@ const dp_hosting_key = import.meta.env.VITE_DP_HOSTING_KEY;
 const dp_hosting_api = `https://api.imgbb.com/1/upload?key=${dp_hosting_key}`;
 const Register = () => {
   const axiosPublic = useAxiosPublic();
-  const { createUser, updateUserProfile, googleSignIn } = useAuth();
+  const { createUser, updateUserProfile } = useAuth();
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-  const [upazilas] = useUpazila();
-  const [districts] = useDistrict();
+  const [divisions] = useDivision();
   const [bloodGroup, setBloodGroup] = useState("");
+  const [division, setDivision] = useState("");
+  const [districts] = useDistrict();
   const [district, setDistrict] = useState("");
+  const [upazilas] = useUpazila();
   const [upazila, setUpazila] = useState("");
 
   const handleSelectBloodGroup = (event) => {
     setBloodGroup(event.target.value);
   };
+  const handleSelectDivision = (event) => {
+    setDivision(event.target.value);
+  };
   const handleSelectDistrict = (event) => {
     setDistrict(event.target.value);
-    console.log(district);
   };
   const handleSelectUpazila = (event) => {
     setUpazila(event.target.value);
@@ -102,11 +103,13 @@ const Register = () => {
                 const userInfo = {
                   name,
                   email,
-                  dp,
+                  photoURL: dp,
                   bloodGroup,
-                  district,
+                  division: division.name,
+                  district: district.name,
                   upazila,
                   status: "active",
+                  role: "user",
                 };
                 console.log(userInfo);
                 axiosPublic.post("/users", userInfo).then((res) => {
@@ -132,18 +135,44 @@ const Register = () => {
         });
     });
   };
-  const handleGoogleLogin = () => {
-    googleSignIn()
-      .then(() => {
-        navigate(location?.state ? location.state : "/");
-        // Swal.fire(
-        //   "Success!",
-        //   "User logged in successfully using Google.",
-        //   "success"
-        // );
-      })
-      .catch(() => setError("Sorry! Something went wrong"));
-  };
+  // const handleGoogleLogin = () => {
+  //   googleSignIn()
+  //     .then((res) => {
+  //       const user = res.user;
+  //       const userInfo = {
+  //         name: user.displayName,
+  //         email: user.email,
+  //         photoURL: user.photoURL,
+  //         bloodGroup,
+  //         district,
+  //         upazila,
+  //         status: "active",
+  //         role: "user",
+  //       };
+  //       console.log(userInfo);
+  //       axiosPublic.post("/users", userInfo).then((res) => {
+  //         if (res.data.insertedId) {
+  //           console.log("user added to the database");
+  //           Swal.fire({
+  //             position: "top-end",
+  //             icon: "success",
+  //             title: "User created successfully.",
+  //             showConfirmButton: false,
+  //             timer: 1500,
+  //           });
+  //           navigate("/");
+  //         }
+  //       });
+
+  //       navigate(location?.state ? location.state : "/");
+  //       // Swal.fire(
+  //       //   "Success!",
+  //       //   "User logged in successfully using Google.",
+  //       //   "success"
+  //       // );
+  //     })
+  //     .catch(() => setError("Sorry! Something went wrong"));
+  // };
 
   const bloodGroups = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
   return (
@@ -263,6 +292,33 @@ const Register = () => {
                   width: { xs: "100%", md: "50%" },
                 }}
               >
+                <InputLabel>Division</InputLabel>
+                <Select
+                  value={division.name}
+                  label="division"
+                  onChange={handleSelectDivision}
+                >
+                  {divisions.map((division) => (
+                    <MenuItem key={division.id} value={division.name}>
+                      {division.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+              <FormControl
+                margin="normal"
+                size="small"
+                fullWidth
+                sx={{
+                  "& .MuiInputBase-input": {
+                    color: "#082f63",
+                  },
+                  "& .MuiInputLabel-root": {
+                    color: "#082f63",
+                  },
+                  width: { xs: "100%", md: "50%" },
+                }}
+              >
                 <InputLabel>District</InputLabel>
                 <Select
                   required
@@ -277,6 +333,14 @@ const Register = () => {
                   ))}
                 </Select>
               </FormControl>
+            </Grid>
+            <Grid
+              sx={{
+                display: "flex",
+                gap: { xs: "5px", md: "10px" },
+                flexDirection: { xs: "column", md: "row" },
+              }}
+            >
               <FormControl
                 margin="normal"
                 size="small"
@@ -304,39 +368,6 @@ const Register = () => {
                   ))}
                 </Select>
               </FormControl>
-            </Grid>
-            <Grid
-              sx={{
-                display: "flex",
-                gap: { xs: "5px", md: "10px" },
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
-            >
-              <label htmlFor="upload-photo">
-                <input
-                  style={{ display: "none" }}
-                  id="upload-photo"
-                  name="photo"
-                  type="file"
-                />
-
-                <Button
-                  component="span"
-                  variant="contained"
-                  sx={{
-                    mt: 1,
-                    py: 1,
-                    backgroundColor: "#75E7B6",
-                    color: "#082f63",
-                    "&:hover": {
-                      backgroundColor: "#5AC79B",
-                    },
-                  }}
-                >
-                  Upload Photo
-                </Button>
-              </label>
               <FormControl
                 margin="normal"
                 size="small"
@@ -348,10 +379,10 @@ const Register = () => {
                   "& .MuiInputLabel-root": {
                     color: "#082f63",
                   },
-                  width: "50%",
+                  width: { xs: "100%", md: "50%" },
                 }}
               >
-                <InputLabel required>Blood Group</InputLabel>
+                <InputLabel>Blood Group</InputLabel>
                 <Select
                   value={bloodGroup}
                   label="Blood Group"
@@ -399,7 +430,32 @@ const Register = () => {
                 },
               }}
             />
+            <Grid>
+              <label htmlFor="upload-photo">
+                <input
+                  style={{ display: "none" }}
+                  id="upload-photo"
+                  name="photo"
+                  type="file"
+                />
 
+                <Button
+                  component="span"
+                  variant="contained"
+                  sx={{
+                    mt: 1,
+                    py: 1,
+                    backgroundColor: "#75E7B6",
+                    color: "#082f63",
+                    "&:hover": {
+                      backgroundColor: "#5AC79B",
+                    },
+                  }}
+                >
+                  Upload Photo
+                </Button>
+              </label>
+            </Grid>
             {error && <p style={{ color: "red" }}>{error}</p>}
             <Button
               type="submit"
@@ -415,7 +471,7 @@ const Register = () => {
               <Typography>Register</Typography>
             </Button>
             <Grid container style={{ fontSize: "13px" }}>
-              <Grid item xs>
+              {/* <Grid item xs>
                 <FormControlLabel
                   control={
                     <CheckBox value="remember" color="primary" sx={{ mr: 1 }} />
@@ -423,7 +479,7 @@ const Register = () => {
                   label="Remember me"
                   sx={{ marginLeft: "1px" }}
                 />
-              </Grid>
+              </Grid> */}
               <Grid item style={{ color: "#082f63" }}>
                 Already have an account?
                 <Link
@@ -439,7 +495,7 @@ const Register = () => {
               </Grid>
             </Grid>
 
-            <hr />
+            {/* <hr />
             <Typography sx={{ fontSize: "15px", textAlign: "center" }}>
               Continue with
             </Typography>
@@ -457,7 +513,7 @@ const Register = () => {
             >
               <GoogleIcon sx={{ mr: 1, color: "#75E7B6", fontSize: "18px" }} />{" "}
               <Typography>Google</Typography>
-            </Button>
+            </Button> */}
           </Box>
           <Copyright sx={{ mt: 5, mb: 4 }} />
         </Box>

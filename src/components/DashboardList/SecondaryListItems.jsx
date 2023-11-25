@@ -9,10 +9,10 @@ import HomeIcon from "@mui/icons-material/Home";
 import useAuth from "../../hooks/useAuth";
 
 export const SecondaryListItems = () => {
-  const { logout } = useAuth();
+  const { logOut } = useAuth();
   const navigate = useNavigate();
   const handleLogOut = () => {
-    logout();
+    logOut();
     navigate("/");
   };
   return (
