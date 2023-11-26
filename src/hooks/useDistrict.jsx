@@ -5,11 +5,10 @@ const useDistrict = () => {
   const { data: districts = [] } = useQuery({
     queryKey: ["districts"],
     queryFn: async () => {
-      const res = await axiosPublic(`/districts`);
+      const res = await axiosPublic.get(`/districts`);
       return res.data;
     },
   });
-  console.log(districts);
   return [districts];
 };
 

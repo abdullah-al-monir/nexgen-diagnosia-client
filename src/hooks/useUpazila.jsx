@@ -5,7 +5,7 @@ const useUpazila = () => {
   const { data: upazilas = [] } = useQuery({
     queryKey: ["upazilas"],
     queryFn: async () => {
-      const res = await axiosPublic(`/upazilas`);
+      const res = await axiosPublic.get(`/upazilas`);
       return res.data;
     },
   });

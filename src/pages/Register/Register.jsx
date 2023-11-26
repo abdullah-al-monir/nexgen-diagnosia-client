@@ -51,9 +51,11 @@ const Register = () => {
     setBloodGroup(event.target.value);
   };
   const handleSelectDivision = (event) => {
+    console.log(event.target.value);
     setDivision(event.target.value);
   };
   const handleSelectDistrict = (event) => {
+    console.log(event.target.value);
     setDistrict(event.target.value);
   };
   const handleSelectUpazila = (event) => {
@@ -105,27 +107,30 @@ const Register = () => {
                   email,
                   photoURL: dp,
                   bloodGroup,
-                  division: division.name,
-                  district: district.name,
+                  division,
+                  district,
                   upazila,
                   status: "active",
                   role: "user",
                 };
                 console.log(userInfo);
-                axiosPublic.post("/users", userInfo).then((res) => {
-                  if (res.data.insertedId) {
-                    console.log("user added to the database");
-                    // Swal.fire({
-                    //   position: "top-end",
-                    //   icon: "success",
-                    //   title: "User created successfully.",
-                    //   showConfirmButton: false,
-                    //   timer: 1500,
-                    // });
-                    navigate("/");
-                    data = new FormData();
-                  }
-                });
+                axiosPublic
+                  .post("/users", userInfo)
+                  .then((res) => {
+                    if (res.data.insertedId) {
+                      console.log("user added to the database");
+                      // Swal.fire({
+                      //   position: "top-end",
+                      //   icon: "success",
+                      //   title: "User created successfully.",
+                      //   showConfirmButton: false,
+                      //   timer: 1500,
+                      // });
+                      navigate("/");
+                      data = new FormData();
+                    }
+                  })
+                  .catch((err) => console.log(err));
               })
               .catch((error) => {
                 console.log(error);

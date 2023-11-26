@@ -14,7 +14,6 @@ import EditIcon from "@mui/icons-material/Edit";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../../hooks/useAuth";
-import { useNavigate } from "react-router-dom";
 import useDivision from "../../../../hooks/useDivision";
 import { useState } from "react";
 import useDistrict from "../../../../hooks/useDistrict";
@@ -23,12 +22,13 @@ import axios from "axios";
 import BeatLoader from "react-spinners/BeatLoader";
 const dp_hosting_key = import.meta.env.VITE_DP_HOSTING_KEY;
 const dp_hosting_api = `https://api.imgbb.com/1/upload?key=${dp_hosting_key}`;
+
 const UserProfile = () => {
   const axiosSecure = useAxiosSecure();
   const { user, updateUserProfile } = useAuth();
   const {
     data: userData = [],
-    refecth,
+    refetch,
     isPending,
   } = useQuery({
     queryKey: ["userData", user?.email],
@@ -37,11 +37,10 @@ const UserProfile = () => {
       return res.data;
     },
   });
-
+  const { photoURL, district, upazila, division, bloodGroup, name, email } =
+    userData;
   console.log(userData);
-  const { photoURL, district, upazila, division, bloodGroup } = userData;
   const [error, setError] = useState(null);
-  const navigate = useNavigate();
   const [divisions] = useDivision();
   const [changeBloodGroup, setBloodGroup] = useState(bloodGroup);
   const [changeDivision, setDivision] = useState(division);
@@ -71,6 +70,7 @@ const UserProfile = () => {
     let data = new FormData(e.target);
     const name = data.get("name");
     const email = data.get("email");
+
     const imageFile = data.get("photo");
     console.log(name, email, imageFile);
     if (imageFile && imageFile.name !== "") {
@@ -91,15 +91,14 @@ const UserProfile = () => {
                   name,
                   email,
                   photoURL: dp,
-                  bloodGroup,
-                  division: changeDivision,
-                  district: changeDistrict,
-                  upazila,
+                  bloodGroup: changeBloodGroup || bloodGroup,
+                  division: changeDivision || division,
+                  district: changeDistrict || district,
+                  upazila: changeUpazila || upazila,
                 };
                 axiosSecure.put("/users", updatedUserInfo).then((res) => {
                   if (res.data.modifiedCount) {
-                    navigate("/");
-                    refecth();
+                    refetch();
                   }
                 });
               })
@@ -113,22 +112,21 @@ const UserProfile = () => {
           console.log(error);
           setError("Something went wrong");
         });
-    } else if (user?.displayName === name) {
+    } else if (user?.displayName !== name) {
       updateUserProfile(name, photoURL)
         .then(() => {
           const updatedUserInfo = {
             name,
             email,
             photoURL,
-            bloodGroup,
-            division: changeDivision,
-            district: changeDistrict,
-            upazila,
+            bloodGroup: changeBloodGroup || bloodGroup,
+            division: changeDivision || division,
+            district: changeDistrict || district,
+            upazila: changeUpazila || upazila,
           };
           axiosSecure.put("/users", updatedUserInfo).then((res) => {
             if (res.data.modifiedCount) {
-              refecth();
-              navigate("/");
+              refetch();
             }
           });
         })
@@ -141,17 +139,16 @@ const UserProfile = () => {
         name,
         email,
         photoURL,
-        bloodGroup,
-        division: changeDivision,
-        district: changeDistrict,
-        upazila,
+        bloodGroup: changeBloodGroup || bloodGroup,
+        division: changeDivision || division,
+        district: changeDistrict || district,
+        upazila: changeUpazila || upazila,
       };
       axiosSecure
         .put("/users", updatedUserInfo)
         .then((res) => {
           if (res.data.modifiedCount) {
-            refecth();
-            navigate("/");
+            refetch();
           }
         })
         .catch((error) => {
@@ -177,7 +174,6 @@ const UserProfile = () => {
   const bloodGroups = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
   return (
     <Box
-      container
       sx={{
         display: "flex",
         alignItems: "center",
@@ -231,7 +227,7 @@ const UserProfile = () => {
                 component="h6"
                 sx={{ fontWeight: "bold" }}
               >
-                {user?.displayName}
+                {name}
               </Typography>
               <Typography>
                 {district}, {division}
@@ -248,7 +244,7 @@ const UserProfile = () => {
             <TextField
               name="name"
               label="Name"
-              defaultValue={user?.displayName}
+              defaultValue={name}
               variant="filled"
               sx={{
                 border: "black",
@@ -258,9 +254,10 @@ const UserProfile = () => {
               }}
             />
             <TextField
+              aria-readonly
               name="email"
               label="Email"
-              defaultValue={user?.email}
+              defaultValue={email}
               variant="filled"
               sx={{
                 border: "black",
@@ -377,7 +374,7 @@ const UserProfile = () => {
               </InputLabel>
               <NativeSelect
                 label="Division"
-                defaultValue={changeUpazila}
+                defaultValue={upazila}
                 variant="filled"
                 sx={{ backgroundColor: "#d5f2e3", paddingLeft: "10px" }}
                 onChange={handleSelectUpazila}
@@ -411,7 +408,7 @@ const UserProfile = () => {
               </InputLabel>
               <NativeSelect
                 label="Blood Group"
-                defaultValue={changeBloodGroup}
+                defaultValue={bloodGroup}
                 variant="filled"
                 sx={{ backgroundColor: "#d5f2e3", paddingLeft: "10px" }}
                 onChange={handleSelectBloodGroup}

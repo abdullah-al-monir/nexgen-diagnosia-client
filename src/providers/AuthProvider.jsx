@@ -9,7 +9,6 @@ import {
   updateProfile,
 } from "firebase/auth";
 import useAxiosPublic from "../hooks/useAxiosPublic";
-
 export const AuthContext = createContext(null);
 const auth = getAuth(app);
 const AuthProvider = ({ children }) => {
@@ -34,6 +33,7 @@ const AuthProvider = ({ children }) => {
       photoURL: photo,
     });
   };
+ 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);

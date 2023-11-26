@@ -5,11 +5,10 @@ const useDivision = () => {
   const { data: divisions = [] } = useQuery({
     queryKey: ["divisions"],
     queryFn: async () => {
-      const res = await axiosPublic("/divisions");
+      const res = await axiosPublic.get("/divisions");
       return res.data;
     },
   });
-  console.log(divisions);
   return [divisions];
 };
 

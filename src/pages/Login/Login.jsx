@@ -43,7 +43,6 @@ const Login = () => {
     const data = new FormData(e.currentTarget);
     const email = data.get("email");
     const password = data.get("password");
-    console.log(email, password);
     signIn(email, password)
       .then(() => {
         navigate(from, { replace: true });
