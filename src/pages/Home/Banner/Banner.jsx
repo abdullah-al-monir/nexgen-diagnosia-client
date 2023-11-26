@@ -2,22 +2,28 @@ import { Grid, Typography, Button, Box, Container } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import BeatLoader from "react-spinners/BeatLoader";
 const Banner = () => {
   const navigate = useNavigate();
   const axiosPublic = useAxiosPublic();
-  const { data: banner = [] } = useQuery({
+  const { data: banner = [], isPending } = useQuery({
     queryKey: ["banner"],
     queryFn: async () => {
       const res = await axiosPublic.get(`/active-banner`);
       return res.data;
     },
   });
-  console.log(banner);
   const { couponCode, discountRate, image, title, text } = banner;
   const handleGoToTests = () => {
     navigate("/allTests");
   };
-
+  if (isPending) {
+    return (
+      <div style={{height: "100vh", display: "flex", justifyContent: "center", alignItems: "center"}}>
+        <BeatLoader style={{color: "#082f63"}} />
+      </div>
+    );
+  }
   return (
     <Box
       style={{

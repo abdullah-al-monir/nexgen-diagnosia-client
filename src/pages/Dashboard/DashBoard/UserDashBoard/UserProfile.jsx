@@ -1,22 +1,24 @@
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
+import {
+  Box,
+  TextField,
+  Grid,
+  Typography,
+  FormControl,
+  Tooltip,
+  NativeSelect,
+  InputLabel,
+  Fab,
+  Button,
+} from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../../hooks/useAuth";
-import FormControl from "@mui/material/FormControl";
-import ListItemIcon from "@mui/material/ListItemIcon";
 import { useNavigate } from "react-router-dom";
 import useDivision from "../../../../hooks/useDivision";
 import { useState } from "react";
 import useDistrict from "../../../../hooks/useDistrict";
 import useUpazila from "../../../../hooks/useUpazila";
-import EditNoteIcon from "@mui/icons-material/Edit";
-import Tooltip from "@mui/material/Tooltip";
-import Button from "@mui/material/Button";
-import NativeSelect from "@mui/material/NativeSelect";
-import InputLabel from "@mui/material/InputLabel";
 import axios from "axios";
 import BeatLoader from "react-spinners/BeatLoader";
 const dp_hosting_key = import.meta.env.VITE_DP_HOSTING_KEY;
@@ -24,7 +26,11 @@ const dp_hosting_api = `https://api.imgbb.com/1/upload?key=${dp_hosting_key}`;
 const UserProfile = () => {
   const axiosSecure = useAxiosSecure();
   const { user, updateUserProfile } = useAuth();
-  const { data: userData = [], isLoading } = useQuery({
+  const {
+    data: userData = [],
+    refecth,
+    isPending,
+  } = useQuery({
     queryKey: ["userData", user?.email],
     queryFn: async () => {
       const res = await axiosSecure.get(`/user?email=${user?.email}`);
@@ -93,6 +99,7 @@ const UserProfile = () => {
                 axiosSecure.put("/users", updatedUserInfo).then((res) => {
                   if (res.data.modifiedCount) {
                     navigate("/");
+                    refecth();
                   }
                 });
               })
@@ -120,6 +127,7 @@ const UserProfile = () => {
           };
           axiosSecure.put("/users", updatedUserInfo).then((res) => {
             if (res.data.modifiedCount) {
+              refecth();
               navigate("/");
             }
           });
@@ -142,6 +150,7 @@ const UserProfile = () => {
         .put("/users", updatedUserInfo)
         .then((res) => {
           if (res.data.modifiedCount) {
+            refecth();
             navigate("/");
           }
         })
@@ -151,10 +160,17 @@ const UserProfile = () => {
         });
     }
   };
-  if (isLoading) {
+  if (isPending) {
     return (
-      <div>
-        <BeatLoader />
+      <div
+        style={{
+          height: "100vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <BeatLoader style={{ color: "#082f63" }} />
       </div>
     );
   }
@@ -188,12 +204,14 @@ const UserProfile = () => {
                 style={{ height: "100px", borderRadius: "50%" }}
               />
               <Tooltip title="Change Profile picture" placement="top">
-                <ListItemIcon
+                <Fab
+                  size="small"
                   sx={{
                     position: "absolute",
-                    bottom: "10px",
-                    right: "-40px",
+                    bottom: "5px",
+                    right: "-10px",
                     color: "#082f63",
+                    backgroundColor: "#d5f2e3",
                   }}
                 >
                   <label>
@@ -202,11 +220,9 @@ const UserProfile = () => {
                       type="file"
                       name="photo"
                     />
-                    <EditNoteIcon
-                      sx={{ height: "30px", width: "30px", cursor: "pointer" }}
-                    />
+                    <EditIcon sx={{ cursor: "pointer" }} />
                   </label>
-                </ListItemIcon>
+                </Fab>
               </Tooltip>
             </Grid>
             <Grid>

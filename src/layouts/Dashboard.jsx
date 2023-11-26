@@ -140,7 +140,7 @@ const Dashboard = () => {
           sx={{
             pt: 4,
             pb: 4,
-            pl: { xs: 8, md: 0 },
+            pl: { xs: 8, md: "28px" },
             minHeight: "calc(100vh - 88px)",
             backgroundColor: "green",
           }}
