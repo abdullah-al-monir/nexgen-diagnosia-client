@@ -17,9 +17,6 @@ export const SecondaryListItems = () => {
   };
   return (
     <>
-      <ListSubheader component="div" inset>
-        Go to
-      </ListSubheader>
       <ListItemButton
         sx={{
           color: "#082f63",

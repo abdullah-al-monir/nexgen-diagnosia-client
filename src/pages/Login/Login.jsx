@@ -13,8 +13,8 @@ import loginbg from "../../assets/loginbg.jpg";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { CheckBox } from "@mui/icons-material";
-import GoogleIcon from "@mui/icons-material/Google";
 import logo from "/nexgenlogo.png";
+import { enqueueSnackbar } from "notistack";
 function Copyright(props) {
   return (
     <Typography variant="body2" color="gray" align="center" {...props}>
@@ -29,8 +29,7 @@ function Copyright(props) {
 }
 
 const Login = () => {
-  const {  signIn } = useAuth();
-  // const [showPassword, setShowPassword] = useState(false);
+  const { signIn } = useAuth();
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
@@ -46,22 +45,13 @@ const Login = () => {
     signIn(email, password)
       .then(() => {
         navigate(from, { replace: true });
-        // Swal.fire("Success!", "User logged in successfully", "success");
+        enqueueSnackbar(`Login successful`, {
+          variant: "success",
+        });
       })
       .catch(() => setError("Invalid email or password"));
   };
-  // const handleGoogleLogin = () => {
-  //   googleSignIn()
-  //     .then(() => {
-  //       navigate(location?.state ? location.state : "/");
-  //       Swal.fire(
-  //         "Success!",
-  //         "User logged in successfully using Google.",
-  //         "success"
-  //       );
-  //     })
-  //     .catch(() => setError("Sorry! Something went wrong"));
-  // };
+
   return (
     <Box
       sx={{

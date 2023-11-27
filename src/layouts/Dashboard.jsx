@@ -96,7 +96,7 @@ const Dashboard = () => {
         <Divider />
         <List component="nav">
           <MainListItems />
-          <Divider sx={{ my: 1 }} />
+          <Divider sx={{ my: 1, bgcolor: "#082f63", borderWidth: "1px" }} />
           <SecondaryListItems />
         </List>
       </Drawer>

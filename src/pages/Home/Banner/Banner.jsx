@@ -93,6 +93,7 @@ const Banner = () => {
                 alignItems: "center",
                 justifyContent: "center",
                 transform: "skew(-20deg)",
+                ml : {xs : "50px"}
               }}
             >
               <Typography

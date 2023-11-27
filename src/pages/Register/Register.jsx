@@ -20,6 +20,7 @@ import Select from "@mui/material/Select";
 import useUpazila from "../../hooks/useUpazila";
 import useDistrict from "../../hooks/useDistrict";
 import useDivision from "../../hooks/useDivision";
+import { enqueueSnackbar } from "notistack";
 function Copyright(props) {
   return (
     <Typography variant="body2" color="gray" align="center" {...props}>
@@ -119,13 +120,9 @@ const Register = () => {
                   .then((res) => {
                     if (res.data.insertedId) {
                       console.log("user added to the database");
-                      // Swal.fire({
-                      //   position: "top-end",
-                      //   icon: "success",
-                      //   title: "User created successfully.",
-                      //   showConfirmButton: false,
-                      //   timer: 1500,
-                      // });
+                      enqueueSnackbar(`Registration successful`, {
+                        variant: "success",
+                      });
                       navigate("/");
                       data = new FormData();
                     }
@@ -140,45 +137,6 @@ const Register = () => {
         });
     });
   };
-  // const handleGoogleLogin = () => {
-  //   googleSignIn()
-  //     .then((res) => {
-  //       const user = res.user;
-  //       const userInfo = {
-  //         name: user.displayName,
-  //         email: user.email,
-  //         photoURL: user.photoURL,
-  //         bloodGroup,
-  //         district,
-  //         upazila,
-  //         status: "active",
-  //         role: "user",
-  //       };
-  //       console.log(userInfo);
-  //       axiosPublic.post("/users", userInfo).then((res) => {
-  //         if (res.data.insertedId) {
-  //           console.log("user added to the database");
-  //           Swal.fire({
-  //             position: "top-end",
-  //             icon: "success",
-  //             title: "User created successfully.",
-  //             showConfirmButton: false,
-  //             timer: 1500,
-  //           });
-  //           navigate("/");
-  //         }
-  //       });
-
-  //       navigate(location?.state ? location.state : "/");
-  //       // Swal.fire(
-  //       //   "Success!",
-  //       //   "User logged in successfully using Google.",
-  //       //   "success"
-  //       // );
-  //     })
-  //     .catch(() => setError("Sorry! Something went wrong"));
-  // };
-
   const bloodGroups = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
   return (
     <Box
@@ -476,15 +434,6 @@ const Register = () => {
               <Typography>Register</Typography>
             </Button>
             <Grid container style={{ fontSize: "13px" }}>
-              {/* <Grid item xs>
-                <FormControlLabel
-                  control={
-                    <CheckBox value="remember" color="primary" sx={{ mr: 1 }} />
-                  }
-                  label="Remember me"
-                  sx={{ marginLeft: "1px" }}
-                />
-              </Grid> */}
               <Grid item style={{ color: "#082f63" }}>
                 Already have an account?
                 <Link
@@ -499,26 +448,6 @@ const Register = () => {
                 </Link>
               </Grid>
             </Grid>
-
-            {/* <hr />
-            <Typography sx={{ fontSize: "15px", textAlign: "center" }}>
-              Continue with
-            </Typography>
-            <hr />
-            <Button
-              onClick={handleGoogleLogin}
-              fullWidth
-              variant="contained"
-              sx={{
-                mt: 1,
-                mb: 2,
-                backgroundColor: "#082f63",
-                color: "#75E7B6",
-              }}
-            >
-              <GoogleIcon sx={{ mr: 1, color: "#75E7B6", fontSize: "18px" }} />{" "}
-              <Typography>Google</Typography>
-            </Button> */}
           </Box>
           <Copyright sx={{ mt: 5, mb: 4 }} />
         </Box>

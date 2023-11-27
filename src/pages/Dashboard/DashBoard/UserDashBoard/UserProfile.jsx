@@ -20,6 +20,7 @@ import useDistrict from "../../../../hooks/useDistrict";
 import useUpazila from "../../../../hooks/useUpazila";
 import axios from "axios";
 import BeatLoader from "react-spinners/BeatLoader";
+import { enqueueSnackbar } from "notistack";
 const dp_hosting_key = import.meta.env.VITE_DP_HOSTING_KEY;
 const dp_hosting_api = `https://api.imgbb.com/1/upload?key=${dp_hosting_key}`;
 
@@ -99,6 +100,10 @@ const UserProfile = () => {
                 axiosSecure.put("/users", updatedUserInfo).then((res) => {
                   if (res.data.modifiedCount) {
                     refetch();
+                    enqueueSnackbar(`${name}'s profile has been updated successfully`, {
+                      variant: "success",
+                      autoHideDuration: 1500,
+                    });
                   }
                 });
               })
@@ -127,6 +132,10 @@ const UserProfile = () => {
           axiosSecure.put("/users", updatedUserInfo).then((res) => {
             if (res.data.modifiedCount) {
               refetch();
+              enqueueSnackbar(`${name}'s profile has been updated successfully`, {
+                variant: "success",
+                autoHideDuration: 1500,
+              });
             }
           });
         })
@@ -149,6 +158,10 @@ const UserProfile = () => {
         .then((res) => {
           if (res.data.modifiedCount) {
             refetch();
+            enqueueSnackbar(`${name}'s profile has been updated successfully`, {
+              variant: "success",
+              autoHideDuration: 1500,
+            });
           }
         })
         .catch((error) => {
@@ -197,7 +210,7 @@ const UserProfile = () => {
             <Grid sx={{ position: "relative" }}>
               <img
                 src={photoURL}
-                style={{ height: "100px", borderRadius: "50%" }}
+                style={{ height: "100px",width: "100px", borderRadius: "50%" }}
               />
               <Tooltip title="Change Profile picture" placement="top">
                 <Fab

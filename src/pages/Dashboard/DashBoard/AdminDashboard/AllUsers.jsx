@@ -18,7 +18,7 @@ import BeatLoader from "react-spinners/BeatLoader";
 import InfoIcon from "@mui/icons-material/Info";
 import { useState } from "react";
 import CustomizedDialogs from "./userModal";
-
+import { enqueueSnackbar } from "notistack";
 const StyledTableCell = styled(TableCell)(() => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: "#082f63",
@@ -59,31 +59,29 @@ const AllUsers = () => {
       </div>
     );
   }
-
-  const handleUpdateUser = (id) => {
+  const handleUpdateUser = (id, name) => {
     console.log(id);
     axiosSecure.patch(`/user-role/${id}`).then((res) => {
       console.log(res.data);
       if (res.data.modifiedCount > 0) {
         refetch();
-        // Swal.fire({
-        //   title: "Confirmed!",
-        //   text: "Selected user's role has been updated successfully.",
-        //   icon: "success",
-        // });
+        enqueueSnackbar(`${name}'s role has been updated successfully`, {
+          variant: "success",
+          autoHideDuration: 1500,
+        });
       }
     });
   };
-  const handleChangeStatus = (id) => {
+  const handleChangeStatus = (id, name) => {
     axiosSecure.patch(`/user-status/${id}`).then((res) => {
       console.log(res.data);
       if (res.data.modifiedCount > 0) {
         refetch();
-        // Swal.fire({
-        //   title: "Confirmed!",
-        //   text: "Selected user's role has been updated successfully.",
-        //   icon: "success",
-        // });
+
+        enqueueSnackbar(`${name}'s status has been updated successfully`, {
+          variant: "success",
+          autoHideDuration: 1500,
+        });
       }
     });
   };
@@ -93,9 +91,8 @@ const AllUsers = () => {
   };
   return (
     <>
-      {" "}
       <Typography variant="h3" sx={{ my: 5, color: "#082f63" }} align="center">
-        Homepage Banners
+        Users
       </Typography>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
@@ -123,7 +120,7 @@ const AllUsers = () => {
                   {user.role === "user" ? (
                     <Tooltip title="Make Admin" placement="top">
                       <Button
-                        onClick={() => handleUpdateUser(user._id)}
+                        onClick={() => handleUpdateUser(user._id, user.name)}
                         size="small"
                         style={{ color: "blue" }}
                       >
@@ -146,7 +143,9 @@ const AllUsers = () => {
                       {user.status === "active" ? (
                         <Tooltip title="Block User" placement="top">
                           <Button
-                            onClick={() => handleChangeStatus(user._id)}
+                            onClick={() =>
+                              handleChangeStatus(user._id, user.name)
+                            }
                             size="small"
                             style={{ color: "#007200" }}
                           >
@@ -156,7 +155,9 @@ const AllUsers = () => {
                       ) : (
                         <Tooltip title="Unblock User" placement="top">
                           <Button
-                            onClick={() => handleChangeStatus(user._id)}
+                            onClick={() =>
+                              handleChangeStatus(user._id, user.name)
+                            }
                             size="small"
                             style={{ color: "red" }}
                           >
@@ -177,7 +178,7 @@ const AllUsers = () => {
                     placement="top"
                   >
                     <Fab
-                      onClick={() => handleClickOpen(user.email)}
+                      onClick={() => handleClickOpen(user.email, user.name)}
                       size="small"
                       variant="extended"
                       sx={{

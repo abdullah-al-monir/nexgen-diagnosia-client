@@ -18,6 +18,9 @@ import Reports from "../pages/Dashboard/DashBoard/UserDashBoard/Reports";
 import AllUsers from "../pages/Dashboard/DashBoard/AdminDashboard/AllUsers";
 import Reservation from "../pages/Dashboard/DashBoard/AdminDashboard/Reservation";
 import AdminHome from "../pages/Dashboard/DashBoard/AdminDashboard/AdminHome";
+import PrivateRoute from "./PrivateRoute";
+import AdminRoute from "./AdminRoute";
+import TestCardDetails from "../components/DashboardList/TestCardDetails";
 
 const Routes = createBrowserRouter([
   {
@@ -56,43 +59,83 @@ const Routes = createBrowserRouter([
     children: [
       {
         path: "profile",
-        element: <UserProfile />,
+        element: (
+          <PrivateRoute>
+            <UserProfile />
+          </PrivateRoute>
+        ),
       },
       {
         path: "appointments",
-        element: <UserAppointments />,
+        element: (
+          <PrivateRoute>
+            <UserAppointments />
+          </PrivateRoute>
+        ),
       },
       {
         path: "reports",
-        element: <Reports />,
+        element: (
+          <PrivateRoute>
+            <Reports />
+          </PrivateRoute>
+        ),
       },
       {
         path: "addBanner",
-        element: <AddBanner />,
+        element: (
+          <AdminRoute>
+            <AddBanner />
+          </AdminRoute>
+        ),
       },
       {
         path: "addTest",
-        element: <AddTest />,
+        element: (
+          <AdminRoute>
+            <AddTest />
+          </AdminRoute>
+        ),
       },
       {
         path: "allBanner",
-        element: <AllBanners />,
+        element: (
+          <AdminRoute>
+            <AllBanners />
+          </AdminRoute>
+        ),
       },
       {
-        path: "allTests",
-        element: <AllTestsAdmin />,
+        path: "testManagement",
+        element: (
+          <AdminRoute>
+            <AllTestsAdmin />
+          </AdminRoute>
+        ),
       },
       {
         path: "allUsers",
-        element: <AllUsers />,
+        element: (
+          <AdminRoute>
+            <AllUsers />
+          </AdminRoute>
+        ),
       },
       {
         path: "reservation",
-        element: <Reservation />,
+        element: (
+          <AdminRoute>
+            <Reservation />
+          </AdminRoute>
+        ),
       },
       {
         path: "dashboard",
-        element: <AdminHome />,
+        element: (
+          <AdminRoute>
+            <AdminHome />
+          </AdminRoute>
+        ),
       },
     ],
   },
@@ -103,6 +146,11 @@ const Routes = createBrowserRouter([
   {
     path: "/register",
     element: <Register />,
+  },
+  {
+    path: "/details/:id",
+    element: <TestCardDetails />,
+    loader: ({ params }) => fetch(`http://localhost:7000/details/${params.id}`),
   },
 ]);
 

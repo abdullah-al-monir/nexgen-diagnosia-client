@@ -1,10 +1,9 @@
+import useTests from "../../../../hooks/useTests";
 
 const AllTestsAdmin = () => {
-  return (
-    <div>
-      All tests page for admin
-    </div>
-  );
+  const [tests] = useTests();
+  console.log(tests);
+  return <div>{tests.length}</div>;
 };
 
 export default AllTestsAdmin;

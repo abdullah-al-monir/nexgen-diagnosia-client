@@ -1,0 +1,211 @@
+[
+  {
+    "testName": "X-Ray",
+    "imageURL": "https://www.healthimages.com/content/uploads/sites/2/2022/11/xray.jpg.webp",
+    "shortDetails": "Diagnostic imaging technique",
+    "details": "X-ray is a common imaging test used to view the inside of your body.",
+    "price": 50,
+    "date": "2023-12-10",
+    "slots": 20,
+    "slotsAvailable": 20,
+    "booked": 0
+  },
+  {
+    "testName": "ECG",
+    "imageURL": "https://medlineplus.gov/ency/images/ency/fullsize/1135.jpg",
+    "shortDetails": "Electrocardiogram",
+    "details": "An ECG is a test that records the electrical activity of the heart.",
+    "price": 30,
+    "date": "2023-11-02",
+    "slots": 15,
+    "slotsAvailable": 8,
+    "booked": 7
+  },
+  {
+    "testName": "MRI Scan",
+    "imageURL": "https://post.healthline.com/wp-content/uploads/2021/02/MRI_Scan_1296x728-header-1296x729.jpg",
+    "shortDetails": "Magnetic Resonance Imaging",
+    "details": "An MRI scan uses magnetic fields and radio waves to create detailed images of the body.",
+    "price": 80,
+    "date": "2023-12-03",
+    "slots": 12,
+    "slotsAvailable": 8,
+    "booked": 4
+  },
+  {
+    "testName": "Blood Test",
+    "imageURL": "https://www.bhf.org.uk/-/media/images/information-support/heart-matters/2019/august-2019/medical/blood-tests/man-having-blood-test-620x400-ss-noexp.jpg",
+    "shortDetails": "Laboratory test to examine blood sample",
+    "details": "A blood test is used to analyze various components in the blood and diagnose conditions.",
+    "price": 40,
+    "date": "2023-12-04",
+    "slots": 18,
+    "slotsAvailable": 8,
+    "booked": 10
+  },
+  {
+    "testName": "Ultrasound",
+    "imageURL": "https://cdn-prod.medicalnewstoday.com/content/images/articles/245/245491/ultrasound-scan.jpg",
+    "shortDetails": "Imaging technique using high-frequency sound waves",
+    "details": "Ultrasound imaging is used to visualize internal body structures for medical diagnosis.",
+    "price": 60,
+    "date": "2023-12-06",
+    "slots": 14,
+    "slotsAvailable": 9,
+    "booked": 5
+  },
+  {
+    "testName": "CT Scan",
+    "imageURL": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBDxqPnM6ChKfrrFsM7UQMw1wpWR6WS8b6Mw",
+    "shortDetails": "Computerized Tomography scan",
+    "details": "CT scans use X-rays and computers to create detailed images of the body.",
+    "price": 75,
+    "date": "2023-11-07",
+    "slots": 16,
+    "slotsAvailable": 11,
+    "booked": 5
+  },
+  {
+    "testName": "Endoscopy",
+    "imageURL": "https://smb.ibsrv.net/imageresizer/image/article_manager/1200x1200/222213/909346/heroimage0.525181001675720350.jpg",
+    "shortDetails": "Visual examination of digestive tract",
+    "details": "Endoscopy is a procedure used to visually examine the digestive tract using a flexible tube with a camera.",
+    "price": 90,
+    "date": "2023-12-08",
+    "slots": 10,
+    "slotsAvailable": 0,
+    "booked": 10
+  },
+  {
+    "testName": "Bone Density Test",
+    "imageURL": "https://healthmatters.nyp.org/wp-content/uploads/2023/05/bone-density-hero-home.jpg",
+    "shortDetails": "Measures bone strength and density",
+    "details": "Bone density tests measure bone mineral density and determine bone strength.",
+    "price": 65,
+    "date": "2023-12-10",
+    "slots": 12,
+    "slotsAvailable": 8,
+    "booked": 4
+  },
+  {
+    "testName": "Pap Smear",
+    "imageURL": "https://globalnews.ca/wp-content/uploads/2023/07/hpv-pap-test-canada-e1689004292858.jpg",
+    "shortDetails": "Cervical cancer screening",
+    "details": "Pap smear is a screening test to detect cervical cancer by collecting cells from the cervix.",
+    "price": 45,
+    "date": "2023-11-12",
+    "slots": 19,
+    "slotsAvailable": 12,
+    "booked": 7
+  },
+  {
+    "testName": "Colonoscopy",
+    "imageURL": "https://www.gidoctor.com/wp-content/uploads/2023/08/colonoscopy-doctors-in-my-area.jpeg",
+    "shortDetails": "Examination of the large intestine",
+    "details": "Colonoscopy is an endoscopic examination used to detect changes or abnormalities in the large intestine.",
+    "price": 70,
+    "date": "2023-12-13",
+    "slots": 18,
+    "slotsAvailable": 10,
+    "booked": 8
+  },
+  {
+    "testName": "Allergy Testing",
+    "imageURL": "https://coloradoallergy.com/wp-content/uploads/2019/01/allergytest.jpg",
+    "shortDetails": "Tests to identify allergies",
+    "details": "Allergy tests help identify allergens causing allergic reactions in individuals.",
+    "price": 55,
+    "date": "2023-12-14",
+    "slots": 14,
+    "slotsAvailable": 8,
+    "booked": 6
+  },
+  {
+    "testName": "Thyroid Function Test",
+    "imageURL": "https://healthinfo.healthengine.com.au/assets/iStock-866279420.jpg",
+    "shortDetails": "Evaluates thyroid gland function",
+    "details": "Thyroid function tests assess how well the thyroid gland is working.",
+    "price": 50,
+    "date": "2023-12-15",
+    "slots": 16,
+    "slotsAvailable": 9,
+    "booked": 7
+  },
+  {
+    "testName": "Lipid Profile",
+    "imageURL": "https://www.pathkindlabs.com/sites/default/files/styles/large/public/2021-08/32.jpg",
+    "shortDetails": "Measures cholesterol levels",
+    "details": "Lipid profile tests measure cholesterol and triglyceride levels in the blood.",
+    "price": 60,
+    "date": "2023-12-16",
+    "slots": 15,
+    "slotsAvailable": 7,
+    "booked": 8
+  },
+  {
+    "testName": "DEXA Scan",
+    "imageURL": "https://draravindan.com/wp-content/uploads/2023/01/DEXA-scan-1.jpg",
+    "shortDetails": "Bone density scan",
+    "details": "DEXA scan measures bone density to assess the risk of fractures and osteoporosis.",
+    "price": 65,
+    "date": "2023-11-18",
+    "slots": 18,
+    "slotsAvailable": 2,
+    "booked": 16
+  },
+  {
+    "testName": "Pulmonary Function Test",
+    "imageURL": "https://5.imimg.com/data5/JQ/TA/EG/SELLER-28012105/surgical-pulmonary-function-test-machine-500x500.jpg",
+    "shortDetails": "Lung function test",
+    "details": "Pulmonary function test evaluates lung function and measures how well the lungs work.",
+    "price": 55,
+    "date": "2023-12-19",
+    "slots": 16,
+    "slotsAvailable": 10,
+    "booked": 6
+  },
+  {
+    "testName": "Throat Swab",
+    "imageURL": "https://healthwaymedical.com/wp-content/uploads/2021/12/SEO-image-for-facebook-home-based-covid19-test-healthway-medical.png",
+    "shortDetails": "Sample collection for bacterial infections",
+    "details": "Throat swab is used to collect samples from the throat to diagnose bacterial infections.",
+    "price": 40,
+    "date": "2023-12-20",
+    "slots": 14,
+    "slotsAvailable": 9,
+    "booked": 5
+  },
+  {
+    "testName": "Glucose Tolerance Test",
+    "imageURL": "https://image.myupchar.com/5376/original/glucose-tolerance-test-kya-hai-kimat-aur-kaise-hota-hai.png",
+    "shortDetails": "Assesses glucose metabolism",
+    "details": "Glucose tolerance test measures the body's ability to process sugar.",
+    "price": 60,
+    "date": "2023-12-21",
+    "slots": 15,
+    "slotsAvailable": 7,
+    "booked": 8
+  },
+  {
+    "testName": "Spirometry",
+    "imageURL": "https://upload.wikimedia.org/wikipedia/commons/0/05/Spirometry_NIH.jpg",
+    "shortDetails": "Lung function measurement",
+    "details": "Spirometry is a lung function test that measures how well you breathe.",
+    "price": 45,
+    "date": "2023-12-22",
+    "slots": 17,
+    "slotsAvailable": 11,
+    "booked": 6
+  },
+  {
+    "testName": "PET-CT Scan",
+    "imageURL": "https://www.dicardiology.com/sites/default/files/styles/content_feed_large_new/public/CT_scan_patient_and_tech.jpg",
+    "shortDetails": "Combined imaging technique",
+    "details": "PET-CT combines positron emission tomography (PET) and computed tomography (CT) scans to provide detailed information about the body's anatomy and metabolic processes.",
+    "price": 150,
+    "date": "2023-12-29",
+    "slots": 10,
+    "slotsAvailable": 7,
+    "booked": 3
+  }
+]

@@ -11,15 +11,20 @@ import ImageAspectRatioIcon from "@mui/icons-material/ImageAspectRatio";
 import BiotechIcon from "@mui/icons-material/Biotech";
 import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
 import BookOnlineIcon from "@mui/icons-material/BookOnline";
+import Badge from "@mui/material/Badge";
 import useAuth from "../../hooks/useAuth";
 import useAdmin from "../../hooks/useAdmin";
+import useBanners from "../../hooks/useBanners";
+import useGetUsers from "../../hooks/useGetUsers";
 
 export const MainListItems = () => {
   const { user } = useAuth();
   const [admin] = useAdmin();
+  const [banners] = useBanners();
+  const [users] = useGetUsers();
   return (
     <>
-      {user &&  (
+      {user && !admin && (
         <>
           <ListItemButton
             sx={{
@@ -27,6 +32,7 @@ export const MainListItems = () => {
               "&.active": {
                 backgroundColor: "#ebeced",
                 fontWeight: 600,
+                borderRight: "2px solid #082f63",
               },
             }}
             component={NavLink}
@@ -43,6 +49,7 @@ export const MainListItems = () => {
               "&.active": {
                 backgroundColor: "#ebeced",
                 fontWeight: 600,
+                borderRight: "2px solid #082f63",
               },
             }}
             component={NavLink}
@@ -59,6 +66,7 @@ export const MainListItems = () => {
               "&.active": {
                 backgroundColor: "#ebeced",
                 fontWeight: 600,
+                borderRight: "2px solid #082f63",
               },
             }}
             component={NavLink}
@@ -80,6 +88,7 @@ export const MainListItems = () => {
               "&.active": {
                 backgroundColor: "#ebeced",
                 fontWeight: 600,
+                borderRight: "2px solid #082f63",
               },
             }}
             component={NavLink}
@@ -96,6 +105,64 @@ export const MainListItems = () => {
               "&.active": {
                 backgroundColor: "#ebeced",
                 fontWeight: 600,
+                borderRight: "2px solid #082f63",
+              },
+            }}
+            component={NavLink}
+            to="/dashboard/allUsers"
+          >
+            <ListItemIcon>
+              <Badge
+                badgeContent={users.length}
+                sx={{ color: "#082f63" }}
+                showZero
+              >
+                <PeopleOutlineIcon sx={{ color: "#082f63" }} />
+              </Badge>{" "}
+            </ListItemIcon>
+            <ListItemText primary="Manage Users" />
+          </ListItemButton>
+          <ListItemButton
+            sx={{
+              color: "#082f63",
+              "&.active": {
+                backgroundColor: "#ebeced",
+                fontWeight: 600,
+                borderRight: "2px solid #082f63",
+              },
+            }}
+            component={NavLink}
+            to="/dashboard/testManagement"
+          >
+            <ListItemIcon>
+              <BiotechIcon sx={{ color: "#082f63" }} />
+            </ListItemIcon>
+            <ListItemText primary="Manage Tests" />
+          </ListItemButton>
+          <ListItemButton
+            sx={{
+              color: "#082f63",
+              "&.active": {
+                backgroundColor: "#ebeced",
+                fontWeight: 600,
+                borderRight: "2px solid #082f63",
+              },
+            }}
+            component={NavLink}
+            to="/dashboard/addTest"
+          >
+            <ListItemIcon>
+              <BiotechIcon sx={{ color: "#082f63" }} />
+            </ListItemIcon>
+            <ListItemText primary="Add a Test" />
+          </ListItemButton>
+          <ListItemButton
+            sx={{
+              color: "#082f63",
+              "&.active": {
+                backgroundColor: "#ebeced",
+                fontWeight: 600,
+                borderRight: "2px solid #082f63",
               },
             }}
             component={NavLink}
@@ -112,54 +179,31 @@ export const MainListItems = () => {
               "&.active": {
                 backgroundColor: "#ebeced",
                 fontWeight: 600,
+                borderRight: "2px solid #082f63",
               },
             }}
             component={NavLink}
             to="/dashboard/allBanner"
           >
             <ListItemIcon>
-              <ImageAspectRatioIcon sx={{ color: "#082f63" }} />
+              <Badge
+                badgeContent={banners.length}
+                sx={{ color: "#082f63" }}
+                showZero
+              >
+                <ImageAspectRatioIcon sx={{ color: "#082f63" }} />
+              </Badge>
             </ListItemIcon>
             <ListItemText primary="All Banners" />
           </ListItemButton>
+
           <ListItemButton
             sx={{
               color: "#082f63",
               "&.active": {
                 backgroundColor: "#ebeced",
                 fontWeight: 600,
-              },
-            }}
-            component={NavLink}
-            to="/dashboard/allTests"
-          >
-            <ListItemIcon>
-              <BiotechIcon sx={{ color: "#082f63" }} />
-            </ListItemIcon>
-            <ListItemText primary="Manage Tests" />
-          </ListItemButton>
-          <ListItemButton
-            sx={{
-              color: "#082f63",
-              "&.active": {
-                backgroundColor: "#ebeced",
-                fontWeight: 600,
-              },
-            }}
-            component={NavLink}
-            to="/dashboard/allUsers"
-          >
-            <ListItemIcon>
-              <PeopleOutlineIcon sx={{ color: "#082f63" }} />
-            </ListItemIcon>
-            <ListItemText primary="Manage Users" />
-          </ListItemButton>
-          <ListItemButton
-            sx={{
-              color: "#082f63",
-              "&.active": {
-                backgroundColor: "#ebeced",
-                fontWeight: 600,
+                borderRight: "2px solid #082f63",
               },
             }}
             component={NavLink}

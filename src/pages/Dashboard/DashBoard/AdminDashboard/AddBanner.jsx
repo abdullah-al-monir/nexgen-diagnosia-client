@@ -9,6 +9,7 @@ import {
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import useAxiosPublic from "../../../../hooks/useAxiosPublic";
 import { useNavigate } from "react-router-dom";
+import { enqueueSnackbar } from "notistack";
 const dp_hosting_key = import.meta.env.VITE_DP_HOSTING_KEY;
 const dp_hosting_api = `https://api.imgbb.com/1/upload?key=${dp_hosting_key}`;
 const AddBanner = () => {
@@ -45,14 +46,10 @@ const AddBanner = () => {
             .post("/banners", bannerData)
             .then((res) => {
               if (res.data.insertedId) {
-                console.log("Banner to the database");
-                // Swal.fire({
-                //   position: "top-end",
-                //   icon: "success",
-                //   title: "User created successfully.",
-                //   showConfirmButton: false,
-                //   timer: 1500,
-                // });
+                enqueueSnackbar(`Banner has been added successfully`, {
+                  variant: "success",
+                  autoHideDuration: 1500,
+                });
                 navigate("/dashboard/allBanner");
                 data = new FormData();
               }
@@ -72,7 +69,7 @@ const AddBanner = () => {
           onSubmit={handleAddBanner}
           noValidate
           sx={{
-            mt: 5
+            mt: 5,
           }}
         >
           <Typography variant="h6">Title</Typography>
@@ -80,12 +77,7 @@ const AddBanner = () => {
           <Typography variant="h6" sx={{ mt: 2 }}>
             Description
           </Typography>
-          <TextField
-            multiline
-            rows={2}
-            name="text"
-            fullWidth
-          />
+          <TextField multiline rows={2} name="text" fullWidth />
           <Grid container spacing={2} sx={{ mt: 2 }}>
             <Grid item xs={6}>
               <Typography variant="h6">Coupon Code</Typography>
@@ -120,9 +112,9 @@ const AddBanner = () => {
               Upload Photo
             </Button>
           </label>
-          <Button
+          <Grid textAlign={"center"}>
+            <Button
               type="submit"
-              fullWidth
               variant="contained"
               sx={{
                 my: 2,
@@ -132,6 +124,7 @@ const AddBanner = () => {
             >
               <Typography>Add Banner</Typography>
             </Button>
+          </Grid>
         </Box>
       </Container>
     </Box>

@@ -13,16 +13,18 @@ import {
   Button,
 } from "@mui/material";
 import BeatLoader from "react-spinners/BeatLoader";
+import { enqueueSnackbar } from "notistack";
 const AllBanners = () => {
   const axiosSecure = useAxiosSecure();
   const [banners, refetch, isPending] = useBanners();
   const handleActiveBanner = (id) => {
     axiosSecure.patch(`/banner/${id}`).then((res) => {
-      console.log(id);
-      console.log(res.data);
       refetch();
       if (res.data.modifiedCount) {
-        console.log("well done");
+        enqueueSnackbar(`Banner activation successful`, {
+          variant: "success",
+          autoHideDuration: 1500,
+        });
       }
     });
   };
@@ -58,7 +60,7 @@ const AllBanners = () => {
           <TableHead style={{ backgroundColor: "#75E7B6" }}>
             <TableRow>
               <TableCell>Title</TableCell>
-              <TableCell align="left">Shortline</TableCell>
+              <TableCell align="left">Description</TableCell>
               <TableCell align="center">Coupon</TableCell>
               <TableCell align="center">Discount</TableCell>
               <TableCell align="center">Status</TableCell>
