@@ -1,26 +1,25 @@
 import { Grid, Typography, Button, Box, Container } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
-import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import BeatLoader from "react-spinners/BeatLoader";
+import useActiveBanner from "../../../hooks/useActiveBanner";
 const Banner = () => {
   const navigate = useNavigate();
-  const axiosPublic = useAxiosPublic();
-  const { data: banner = [], isPending } = useQuery({
-    queryKey: ["banner"],
-    queryFn: async () => {
-      const res = await axiosPublic.get(`/active-banner`);
-      return res.data;
-    },
-  });
+  const [banner, isPending] = useActiveBanner();
   const { couponCode, discountRate, image, title, text } = banner;
   const handleGoToTests = () => {
     navigate("/allTests");
   };
   if (isPending) {
     return (
-      <div style={{height: "100vh", display: "flex", justifyContent: "center", alignItems: "center"}}>
-        <BeatLoader style={{color: "#082f63"}} />
+      <div
+        style={{
+          height: "100vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <BeatLoader style={{ color: "#082f63" }} />
       </div>
     );
   }
@@ -93,7 +92,7 @@ const Banner = () => {
                 alignItems: "center",
                 justifyContent: "center",
                 transform: "skew(-20deg)",
-                ml : {xs : "50px"}
+                ml: { xs: "50px" },
               }}
             >
               <Typography

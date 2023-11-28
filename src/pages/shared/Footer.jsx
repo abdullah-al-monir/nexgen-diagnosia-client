@@ -15,7 +15,7 @@ function Footer() {
       return res.data;
     },
   });
-  console.log(footerDatas);
+
   return (
     <Box
       component="footer"

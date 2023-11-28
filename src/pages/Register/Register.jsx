@@ -121,7 +121,7 @@ const Register = () => {
                     if (res.data.insertedId) {
                       console.log("user added to the database");
                       enqueueSnackbar(`Registration successful`, {
-                        variant: "success",
+                        variant: "success",autoHideDuration: 1500,
                       });
                       navigate("/");
                       data = new FormData();

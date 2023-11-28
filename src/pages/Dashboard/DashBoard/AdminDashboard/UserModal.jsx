@@ -29,8 +29,16 @@ export default function CustomizedDialogs({ userEmail, open, setOpen }) {
       return res.data;
     },
   });
-  const { photoURL, district, upazila, division, bloodGroup, name, email,status } =
-    userData;
+  const {
+    photoURL,
+    district,
+    upazila,
+    division,
+    bloodGroup,
+    name,
+    email,
+    status,
+  } = userData;
   const handleClose = () => {
     setOpen(false);
   };
@@ -39,6 +47,7 @@ export default function CustomizedDialogs({ userEmail, open, setOpen }) {
       <div
         style={{
           height: "100vh",
+          width: "100vw",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",

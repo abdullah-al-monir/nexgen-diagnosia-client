@@ -13,9 +13,11 @@ import { NavLink, Link, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import { useState } from "react";
 import logo from "/nexgenlogo.png";
+import useAdmin from "../../hooks/useAdmin";
 
 function Navbar() {
   const { user, logOut } = useAuth();
+  const [admin] = useAdmin();
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const navigate = useNavigate();
@@ -24,14 +26,15 @@ function Navbar() {
     navigate("/");
   };
   const settings = [
-    { name: "Profile", link: "/profile" },
-    { name: "Account", link: "/account" },
-    { name: "Dashboard", link: "/dashboard" },
+    { name: "Profile", link: "/dashboard/profile" },
   ];
   const pages = [
     { name: "Home", link: "/" },
     { name: "All Tests", link: "/allTests" },
-    { name: "Dashboard", link: "/dashboard" },
+    {
+      name: `${!admin ? "Appointments" : "Dashboard"}`,
+      link: `${!admin ? "/dashboard/appointments" : "/dashboard/dashboard"}`,
+    },
     { name: "Blog", link: "/blog" },
     { name: "About Us", link: "/about" },
     { name: "Contact", link: "/contact" },

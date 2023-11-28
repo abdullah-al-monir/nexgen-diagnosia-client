@@ -21,23 +21,14 @@ import useUpazila from "../../../../hooks/useUpazila";
 import axios from "axios";
 import BeatLoader from "react-spinners/BeatLoader";
 import { enqueueSnackbar } from "notistack";
+import useCurrentUser from "../../../../hooks/useCurrentUser";
 const dp_hosting_key = import.meta.env.VITE_DP_HOSTING_KEY;
 const dp_hosting_api = `https://api.imgbb.com/1/upload?key=${dp_hosting_key}`;
 
 const UserProfile = () => {
   const axiosSecure = useAxiosSecure();
   const { user, updateUserProfile } = useAuth();
-  const {
-    data: userData = [],
-    refetch,
-    isPending,
-  } = useQuery({
-    queryKey: ["userData", user?.email],
-    queryFn: async () => {
-      const res = await axiosSecure.get(`/user?email=${user?.email}`);
-      return res.data;
-    },
-  });
+  const [userData, refetch, isPending] = useCurrentUser();
   const { photoURL, district, upazila, division, bloodGroup, name, email } =
     userData;
   console.log(userData);
@@ -100,10 +91,13 @@ const UserProfile = () => {
                 axiosSecure.put("/users", updatedUserInfo).then((res) => {
                   if (res.data.modifiedCount) {
                     refetch();
-                    enqueueSnackbar(`${name}'s profile has been updated successfully`, {
-                      variant: "success",
-                      autoHideDuration: 1500,
-                    });
+                    enqueueSnackbar(
+                      `${name}'s profile has been updated successfully`,
+                      {
+                        variant: "success",
+                        autoHideDuration: 1500,
+                      }
+                    );
                   }
                 });
               })
@@ -132,10 +126,13 @@ const UserProfile = () => {
           axiosSecure.put("/users", updatedUserInfo).then((res) => {
             if (res.data.modifiedCount) {
               refetch();
-              enqueueSnackbar(`${name}'s profile has been updated successfully`, {
-                variant: "success",
-                autoHideDuration: 1500,
-              });
+              enqueueSnackbar(
+                `${name}'s profile has been updated successfully`,
+                {
+                  variant: "success",
+                  autoHideDuration: 1500,
+                }
+              );
             }
           });
         })
@@ -210,7 +207,7 @@ const UserProfile = () => {
             <Grid sx={{ position: "relative" }}>
               <img
                 src={photoURL}
-                style={{ height: "100px",width: "100px", borderRadius: "50%" }}
+                style={{ height: "100px", width: "100px", borderRadius: "50%" }}
               />
               <Tooltip title="Change Profile picture" placement="top">
                 <Fab

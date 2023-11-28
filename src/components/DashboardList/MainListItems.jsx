@@ -16,12 +16,15 @@ import useAuth from "../../hooks/useAuth";
 import useAdmin from "../../hooks/useAdmin";
 import useBanners from "../../hooks/useBanners";
 import useGetUsers from "../../hooks/useGetUsers";
+import useTests from "../../hooks/useTests";
+import DataSaverOnIcon from "@mui/icons-material/DataSaverOn";
 
 export const MainListItems = () => {
   const { user } = useAuth();
   const [admin] = useAdmin();
   const [banners] = useBanners();
   const [users] = useGetUsers();
+  const [tests] = useTests();
   return (
     <>
       {user && !admin && (
@@ -80,7 +83,7 @@ export const MainListItems = () => {
         </>
       )}
       {/* Admin */}
-      {user && admin && (
+      {admin && (
         <>
           <ListItemButton
             sx={{
@@ -132,12 +135,12 @@ export const MainListItems = () => {
               },
             }}
             component={NavLink}
-            to="/dashboard/testManagement"
+            to="/dashboard/addTest"
           >
             <ListItemIcon>
-              <BiotechIcon sx={{ color: "#082f63" }} />
+              <DataSaverOnIcon sx={{ color: "#082f63" }} />
             </ListItemIcon>
-            <ListItemText primary="Manage Tests" />
+            <ListItemText primary="Add a Test" />
           </ListItemButton>
           <ListItemButton
             sx={{
@@ -149,13 +152,20 @@ export const MainListItems = () => {
               },
             }}
             component={NavLink}
-            to="/dashboard/addTest"
+            to="/dashboard/testManagement"
           >
             <ListItemIcon>
-              <BiotechIcon sx={{ color: "#082f63" }} />
+              <Badge
+                badgeContent={tests.length}
+                sx={{ color: "#082f63" }}
+                showZero
+              >
+                <BiotechIcon sx={{ color: "#082f63" }} />
+              </Badge>
             </ListItemIcon>
-            <ListItemText primary="Add a Test" />
+            <ListItemText primary="Manage Tests" />
           </ListItemButton>
+
           <ListItemButton
             sx={{
               color: "#082f63",

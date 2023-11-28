@@ -21,6 +21,7 @@ import AdminHome from "../pages/Dashboard/DashBoard/AdminDashboard/AdminHome";
 import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
 import TestCardDetails from "../components/DashboardList/TestCardDetails";
+import UpdateTest from "../pages/UpdateTest/UpdateTest";
 
 const Routes = createBrowserRouter([
   {
@@ -137,8 +138,19 @@ const Routes = createBrowserRouter([
           </AdminRoute>
         ),
       },
+      {
+        path: "update/:id",
+        element: (
+          <AdminRoute>
+            <UpdateTest />
+          </AdminRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:7000/details/${params.id}`),
+      },
     ],
   },
+
   {
     path: "/login",
     element: <Login />,
@@ -149,7 +161,11 @@ const Routes = createBrowserRouter([
   },
   {
     path: "/details/:id",
-    element: <TestCardDetails />,
+    element: (
+      <PrivateRoute>
+        <TestCardDetails />
+      </PrivateRoute>
+    ),
     loader: ({ params }) => fetch(`http://localhost:7000/details/${params.id}`),
   },
 ]);

@@ -59,7 +59,13 @@ const AddBanner = () => {
       });
   };
   return (
-    <Box sx={{ bgcolor: "white", py: 5 }}>
+    <Box
+      sx={{
+        minHeight: "calc(100vh - 155px)",
+        backgroundColor: "white",
+        padding: "50px 10px",
+      }}
+    >
       <Typography variant="h3" sx={{ color: "#082f63" }} align="center">
         Add A Banner
       </Typography>

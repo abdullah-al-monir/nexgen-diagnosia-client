@@ -10,6 +10,7 @@ import {
   Button,
   Typography,
   Tooltip,
+  Box,
 } from "@mui/material";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
@@ -90,7 +91,13 @@ const AllUsers = () => {
     setOpen(true);
   };
   return (
-    <>
+    <Box
+      sx={{
+        minHeight: "calc(100vh - 155px)",
+        backgroundColor: "white",
+        padding: "10px",
+      }}
+    >
       <Typography variant="h3" sx={{ my: 5, color: "#082f63" }} align="center">
         Users
       </Typography>
@@ -120,18 +127,20 @@ const AllUsers = () => {
                   {user.role === "user" ? (
                     <Tooltip title="Make Admin" placement="top">
                       <Button
+                        variant="contained"
                         onClick={() => handleUpdateUser(user._id, user.name)}
                         size="small"
-                        style={{ color: "blue" }}
+                        style={{ color: "yellowgreen",backgroundColor: "#082f63" }}
                       >
                         {user.role}
                       </Button>
                     </Tooltip>
                   ) : (
                     <Button
+                      variant="contained"
                       size="small"
                       disabled
-                      style={{ color: "orangered" }}
+                      style={{ color: "orange",backgroundColor: "#082f63" }}
                     >
                       {user.role}
                     </Button>
@@ -143,11 +152,12 @@ const AllUsers = () => {
                       {user.status === "active" ? (
                         <Tooltip title="Block User" placement="top">
                           <Button
+                            variant="contained"
                             onClick={() =>
                               handleChangeStatus(user._id, user.name)
                             }
                             size="small"
-                            style={{ color: "#007200" }}
+                            style={{ color: "#75E7B6",backgroundColor: "#082f63" }}
                           >
                             {user.status}
                           </Button>{" "}
@@ -155,11 +165,12 @@ const AllUsers = () => {
                       ) : (
                         <Tooltip title="Unblock User" placement="top">
                           <Button
+                            variant="contained"
                             onClick={() =>
                               handleChangeStatus(user._id, user.name)
                             }
                             size="small"
-                            style={{ color: "red" }}
+                            style={{ color: "red",backgroundColor: "#082f63" }}
                           >
                             {user.status}
                           </Button>{" "}
@@ -167,7 +178,12 @@ const AllUsers = () => {
                       )}
                     </>
                   ) : (
-                    <Button size="small" disabled style={{ color: "#007200" }}>
+                    <Button
+                      variant="contained"
+                      size="small"
+                      disabled
+                      style={{ color: "#75E7B6",backgroundColor: "#082f63" }}
+                    >
                       {user.status}
                     </Button>
                   )}
@@ -201,7 +217,7 @@ const AllUsers = () => {
           </TableBody>
         </Table>
       </TableContainer>
-    </>
+    </Box>
   );
 };
 

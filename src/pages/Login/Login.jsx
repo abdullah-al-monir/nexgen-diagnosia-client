@@ -47,6 +47,7 @@ const Login = () => {
         navigate(from, { replace: true });
         enqueueSnackbar(`Login successful`, {
           variant: "success",
+          autoHideDuration: 1500,
         });
       })
       .catch(() => setError("Invalid email or password"));

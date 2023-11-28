@@ -8,10 +8,16 @@ import {
   Typography,
 } from "@mui/material";
 import dayjs from "dayjs";
+import { useState } from "react";
 import { useLoaderData } from "react-router-dom";
+import useCurrentUser from "../../hooks/useCurrentUser";
+import { enqueueSnackbar } from "notistack";
+import PaymentModal from "./PaymentModal";
 const TestCardDetails = () => {
+  const [userData] = useCurrentUser();
   const testData = useLoaderData();
-  console.log(testData);
+  const [open, setOpen] = useState(false);
+
   const {
     testName,
     shortDetails,
@@ -24,9 +30,31 @@ const TestCardDetails = () => {
     booked,
   } = testData;
   const presentDate = dayjs();
-  console.log(date);
   const formattedDate = presentDate.format("YYYY-MM-DD");
- 
+  const userEmail = userData.email;
+  const userName = userData.name;
+  const modalData = { userEmail, userName, price, testName };
+  const handleClickOpen = () => {
+    if (userData.status === "blocked") {
+      return enqueueSnackbar(`Sorry! You can't book for any tests`, {
+        variant: "error",
+        autoHideDuration: 1500,
+      });
+    }
+    if (date <= formattedDate) {
+      return enqueueSnackbar(`Sorry! You can't book for this test`, {
+        variant: "error",
+        autoHideDuration: 1500,
+      });
+    }
+    if (slotsAvailable === 0) {
+      return enqueueSnackbar(`Sorry! No slot available for this test`, {
+        variant: "error",
+        autoHideDuration: 1500,
+      });
+    }
+    setOpen(true);
+  };
   return (
     <Container
       sx={{
@@ -80,6 +108,7 @@ const TestCardDetails = () => {
         </CardContent>
         <CardActions style={{ justifyContent: "flex-start" }}>
           <Button
+            onClick={handleClickOpen}
             size="small"
             type="submit"
             variant="contained"
@@ -94,6 +123,7 @@ const TestCardDetails = () => {
           </Button>
         </CardActions>
       </Card>
+      <PaymentModal modalData={modalData} open={open} setOpen={setOpen} />
     </Container>
   );
 };

@@ -4,8 +4,8 @@ const useTests = () => {
   const axiosPublic = useAxiosPublic();
   const {
     data: tests = [],
-    isPending,
     refetch,
+    isPending,
   } = useQuery({
     queryKey: ["tests"],
     queryFn: async () => {
@@ -13,7 +13,7 @@ const useTests = () => {
       return res.data;
     },
   });
-  return [tests, isPending, refetch];
+  return [tests, refetch, isPending];
 };
 
 export default useTests;
