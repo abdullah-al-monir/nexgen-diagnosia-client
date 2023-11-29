@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "title": "Health Checkup Bonanza!",
+    "description": "Comprehensive health checkup at 20% off! Limited slots available.",
+    "image": "https://www.utphysicians.com/wp-content/uploads/2021/03/UT-Physicians-Featured-Image-Template-Annual-Screening.jpg",
+    "startDate": "2023-12-01",
+    "endDate": "2023-12-15",
+    "comment": 10,
+    "like": 36
+  },
+  {
+    "id": 2,
+    "title": "Family Wellness Package",
+    "description": "Book for the whole family and get free consultation vouchers!",
+    "image": "https://www.metropolisindia.com/newdata/images/landing_page_wellness_truhealth.png",
+    "startDate": "2023-11-25",
+    "endDate": "2023-12-31",
+    "comment": 15,
+    "like": 25
+  },
+  {
+    "id": 3,
+    "title": "Senior Citizen Discount",
+    "description": "Special discounts for senior citizens on all diagnostic tests!",
+    "image": "https://www.goindigo.in/content/dam/indigov2/6e-website/add-on-services/discount/senior-citizen-landing-page-r.jpg",
+    "startDate": "2023-12-01",
+    "endDate": "2023-12-31",
+    "comment": 5,
+    "like": 18
+  },
+  {
+    "id": 4,
+    "title": "Early Bird Special",
+    "description": "Book your tests in advance and avail 15% off!",
+    "image": "https://aspecialangelstouch.com/wp-content/uploads/2023/10/article-Day-Care-article-asat-400x280.png",
+    "startDate": "2023-12-01",
+    "endDate": "2023-12-10",
+    "comment": 8,
+    "like": 20
+  }
+]

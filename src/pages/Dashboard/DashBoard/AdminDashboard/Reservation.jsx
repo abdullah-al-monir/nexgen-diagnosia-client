@@ -15,11 +15,12 @@ import {
 import dayjs from "dayjs";
 import { enqueueSnackbar } from "notistack";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 const Reservation = () => {
   const axiosSecure = useAxiosSecure();
   const [search, setSearch] = useState("");
   const [appointments, setAppointments] = useState([]);
+  const [reportFiles, setReportFiles] = useState({});
   useEffect(() => {
     axiosSecure.get(`/appointments`).then((res) => {
       setAppointments(res.data);
@@ -39,22 +40,18 @@ const Reservation = () => {
           setAppointments(res.data);
         });
     } else {
-      axiosSecure
-        .get(`/appointments?search=${newValue}`)
-        .then((res) => {
-          setAppointments(res.data);
-        });
+      axiosSecure.get(`/appointments?search=${newValue}`).then((res) => {
+        setAppointments(res.data);
+      });
     }
   };
 
   const handleSearch = (e) => {
     e.preventDefault();
 
-    axiosSecure
-      .get(`/appointments?search=${search}`,)
-      .then((res) => {
-        setAppointments(res.data);
-      });
+    axiosSecure.get(`/appointments?search=${search}`).then((res) => {
+      setAppointments(res.data);
+    });
   };
 
   const handleCancel = (id) => {
@@ -70,6 +67,15 @@ const Reservation = () => {
     });
   };
 
+  const handleAddReport = (id, selectedFile) => {
+    console.log(`File selected for appointment ID ${id}:`);
+    // Update the reportFiles state for this appointment
+    setReportFiles({
+      ...reportFiles,
+      [id]: selectedFile,
+    });
+    console.log(reportFiles);
+  };
   return (
     <Box
       sx={{
@@ -158,11 +164,26 @@ const Reservation = () => {
                           component="span"
                         >
                           Upload
-                          <input type="file" name="report" hidden />
+                          <input
+                            type="file"
+                            hidden
+                            name={`report-${appointment._id}`}
+                            onChange={(e) =>
+                              handleAddReport(
+                                appointment._id,
+                                e.target.files[0]
+                              )
+                            }
+                          />
                         </Button>
                       </FormLabel>
                       <Button
-                        type="submit"
+                        onClick={() =>
+                          handleAddReport(
+                            appointment._id,
+                            reportFiles[appointment._id]
+                          )
+                        }
                         component="span"
                         variant="contained"
                         size="small"

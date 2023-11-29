@@ -13,7 +13,7 @@ const Tips = () => {
     },
   });
   return (
-    <Container sx={{ my: 10 }}>
+    <Container sx={{ mt: 10 }}>
       <Typography
         variant="h3"
         sx={{ my: 5, color: "#082f63", textTransform: "uppercase" }}

@@ -1,10 +1,9 @@
-
 import useAxiosPublic from "./useAxiosPublic";
 import useAuth from "./useAuth";
 import { useQuery } from "@tanstack/react-query";
 const useCurrentUser = () => {
   const axiosSecure = useAxiosPublic();
-  const { user } = useAuth();
+  const { user} = useAuth();
   const {
     data: userData = [],
     refetch,

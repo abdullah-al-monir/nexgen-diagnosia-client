@@ -12,7 +12,6 @@ import {
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
-import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../../hooks/useAuth";
 import useDivision from "../../../../hooks/useDivision";
 import { useState } from "react";
@@ -31,7 +30,6 @@ const UserProfile = () => {
   const [userData, refetch, isPending] = useCurrentUser();
   const { photoURL, district, upazila, division, bloodGroup, name, email } =
     userData;
-  console.log(userData);
   const [error, setError] = useState(null);
   const [divisions] = useDivision();
   const [changeBloodGroup, setBloodGroup] = useState(bloodGroup);

@@ -64,13 +64,19 @@ const About = () => {
             {about?.overview}
           </Typography>
         </Paper>
-        <Typography variant="h4" gutterBottom>
+        <Typography color="#082f63" fontWeight="500" variant="h4" gutterBottom>
           Our Mission
         </Typography>
         <Typography variant="body1" align="justify" gutterBottom>
           {about?.mission}
         </Typography>
-        <Typography sx={{ mt: 5 }} variant="h4" gutterBottom>
+        <Typography
+          color="#082f63"
+          fontWeight="500"
+          sx={{ mt: 5 }}
+          variant="h4"
+          gutterBottom
+        >
           Our Values
         </Typography>
         <List>
@@ -84,21 +90,32 @@ const About = () => {
           ))}
         </List>
         <Divider />
-        <Typography sx={{ mt: 5 }} variant="h4" gutterBottom>
+        <Typography
+          color="#082f63"
+          fontWeight="500"
+          sx={{ mt: 5 }}
+          variant="h4"
+          gutterBottom
+        >
           Our Team
         </Typography>
-        <Grid container spacing={4} sx={{mb:7}}>
+        <Grid container spacing={4} sx={{ mb: 7 }}>
           {about?.team?.map((member, index) => (
-            <Grid item xs={12} md={4} key={index} >
+            <Grid item xs={12} md={4} key={index}>
               <Paper
                 variant="outlined"
                 sx={{
                   padding: "16px",
                   marginBottom: "24px",
-                  height: "100%"
+                  height: "100%",
                 }}
               >
-                <Typography variant="h6" gutterBottom>
+                <Typography
+                  color="#082f63"
+                  fontWeight="500"
+                  variant="h6"
+                  gutterBottom
+                >
                   {member.name}
                 </Typography>
                 <Typography variant="subtitle2" gutterBottom>
