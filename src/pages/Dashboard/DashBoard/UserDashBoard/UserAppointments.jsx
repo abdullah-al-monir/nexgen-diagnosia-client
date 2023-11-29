@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 import dayjs from "dayjs";
 import { enqueueSnackbar } from "notistack";
-import BeatLoader from "react-spinners/BeatLoader"
+import BeatLoader from "react-spinners/BeatLoader";
 const UserAppointments = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
@@ -73,13 +73,15 @@ const UserAppointments = () => {
               <TableCell align="center">Date</TableCell>
               <TableCell align="center">Time</TableCell>
               <TableCell align="center">Status</TableCell>
-              <TableCell align="right" sx={{pr:4}}>Action</TableCell>
+              <TableCell align="right" sx={{ pr: 4 }}>
+                Action
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {appointments.map((appointment) => (
               <TableRow key={appointment._id}>
-                <TableCell >{appointment.testName}</TableCell>
+                <TableCell>{appointment.testName}</TableCell>
                 <TableCell align="center">
                   {dayjs(appointment.date).format("YYYY-MM-DD")}
                 </TableCell>
@@ -87,7 +89,7 @@ const UserAppointments = () => {
                   {" "}
                   {dayjs(appointment.date).format("HH:mm")}
                 </TableCell>
-                <TableCell  align="center">{appointment.status}</TableCell>
+                <TableCell align="center">{appointment.status}</TableCell>
                 <TableCell align="right">
                   <Button
                     size="small"

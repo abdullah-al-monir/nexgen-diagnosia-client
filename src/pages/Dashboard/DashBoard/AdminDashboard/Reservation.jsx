@@ -10,17 +10,16 @@ import {
   Box,
   Typography,
   TextField,
-  FormLabel,
 } from "@mui/material";
 import dayjs from "dayjs";
 import { enqueueSnackbar } from "notistack";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import { useEffect, useRef, useState } from "react";
+import ReportUpload from "../../../../components/ReportUpload/ReportUpload";
 const Reservation = () => {
   const axiosSecure = useAxiosSecure();
   const [search, setSearch] = useState("");
   const [appointments, setAppointments] = useState([]);
-  const [reportFiles, setReportFiles] = useState({});
   useEffect(() => {
     axiosSecure.get(`/appointments`).then((res) => {
       setAppointments(res.data);
@@ -67,15 +66,16 @@ const Reservation = () => {
     });
   };
 
-  const handleAddReport = (id, selectedFile) => {
-    console.log(`File selected for appointment ID ${id}:`);
-    // Update the reportFiles state for this appointment
-    setReportFiles({
-      ...reportFiles,
-      [id]: selectedFile,
-    });
-    console.log(reportFiles);
-  };
+  // const handleAddReport = (id, selectedFile) => {
+  //   console.log(`File selected for appointment ID ${id}:`);
+  //   // Update the reportFiles state for this appointment
+  //   setReportFiles({
+  //     ...reportFiles,
+  //     [id]: selectedFile,
+  //   });
+  //   console.log(reportFiles);
+  // };
+
   return (
     <Box
       sx={{
@@ -121,7 +121,7 @@ const Reservation = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {appointments.map((appointment) => (
+            {appointments?.map((appointment) => (
               <TableRow key={appointment._id}>
                 <TableCell>{appointment.testName}</TableCell>
                 <TableCell>{appointment.email}</TableCell>
@@ -131,11 +131,14 @@ const Reservation = () => {
                 <TableCell align="center">
                   {appointment.status === "pending" ? (
                     <Button
+                      disabled
                       size="small"
                       variant="contained"
                       sx={{
-                        backgroundColor: "#082f63",
-                        color: "orange",
+                        "&:disabled": {
+                          backgroundColor: "#082f63",
+                          color: "orange",
+                        },
                       }}
                     >
                       Pending
@@ -146,8 +149,10 @@ const Reservation = () => {
                       size="small"
                       variant="contained"
                       sx={{
-                        backgroundColor: "#082f63",
-                        color: "#75E7B6",
+                        "&:disabled": {
+                          backgroundColor: "#082f63",
+                          color: "#75E7B6",
+                        },
                       }}
                     >
                       Delivered
@@ -157,43 +162,14 @@ const Reservation = () => {
                 <TableCell align="center">
                   {appointment.status === "pending" ? (
                     <>
-                      <FormLabel>
-                        <Button
-                          variant="outlined"
-                          size="small"
-                          component="span"
-                        >
-                          Upload
-                          <input
-                            type="file"
-                            hidden
-                            name={`report-${appointment._id}`}
-                            onChange={(e) =>
-                              handleAddReport(
-                                appointment._id,
-                                e.target.files[0]
-                              )
-                            }
-                          />
-                        </Button>
-                      </FormLabel>
-                      <Button
-                        onClick={() =>
-                          handleAddReport(
-                            appointment._id,
-                            reportFiles[appointment._id]
-                          )
-                        }
-                        component="span"
-                        variant="contained"
-                        size="small"
-                        sx={{
-                          backgroundColor: "#082f63",
-                          color: "orange",
+                      <ReportUpload
+                        report={{
+                          id: appointment._id,
+                          testName: appointment.testName,
+                          status: appointment.status,
+                          email: appointment.email,
                         }}
-                      >
-                        Submit
-                      </Button>
+                      />
                     </>
                   ) : (
                     <Button
@@ -201,11 +177,13 @@ const Reservation = () => {
                       size="small"
                       variant="contained"
                       sx={{
-                        backgroundColor: "#082f63",
-                        color: "#75E7B6",
+                        "&:disabled": {
+                          backgroundColor: "#75E7B6",
+                          color: "#082f63",
+                        },
                       }}
                     >
-                      Submitted
+                      Uploaded
                     </Button>
                   )}
                 </TableCell>

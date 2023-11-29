@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 const TestCard = ({ test }) => {
   const { testName, shortDetails, price, date, imageURL, _id } = test;
   const presentDate = dayjs();
-  console.log(date);
   const formattedDate = presentDate.format("YYYY-MM-DD");
   return (
     <Card

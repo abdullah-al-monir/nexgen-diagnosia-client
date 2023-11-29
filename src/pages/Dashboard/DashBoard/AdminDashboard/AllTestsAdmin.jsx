@@ -62,6 +62,7 @@ const AllTestsAdmin = () => {
             <TableRow>
               <TableCell>#</TableCell>
               <TableCell>Test Name</TableCell>
+              <TableCell align="center">Reservations</TableCell>
               <TableCell align="center">Date</TableCell>
               <TableCell align="center">Price</TableCell>
               <TableCell align="center">Edit</TableCell>
@@ -79,6 +80,7 @@ const AllTestsAdmin = () => {
                   {test.testName}
                 </TableCell>
 
+                <TableCell align="center">{test.booked}</TableCell>
                 <TableCell align="center">{test.date}</TableCell>
                 <TableCell align="center">${test.price}</TableCell>
                 <TableCell align="center">
