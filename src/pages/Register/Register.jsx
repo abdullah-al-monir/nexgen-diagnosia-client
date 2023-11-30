@@ -71,7 +71,6 @@ const Register = () => {
     const password = data.get("password");
     const confirmPassword = data.get("confirmPassword");
 
-    console.log(name, email, password);
     if (
       name === "" ||
       email === "" ||
