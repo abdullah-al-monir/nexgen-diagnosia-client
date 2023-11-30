@@ -52,6 +52,24 @@ const Routes = createBrowserRouter([
         path: "/blog",
         element: <Blog />,
       },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/register",
+        element: <Register />,
+      },
+      {
+        path: "/details/:id",
+        element: (
+          <PrivateRoute>
+            <TestCardDetails />
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:7000/details/${params.id}`),
+      },
     ],
   },
   {
@@ -149,24 +167,6 @@ const Routes = createBrowserRouter([
           fetch(`http://localhost:7000/details/${params.id}`),
       },
     ],
-  },
-
-  {
-    path: "/login",
-    element: <Login />,
-  },
-  {
-    path: "/register",
-    element: <Register />,
-  },
-  {
-    path: "/details/:id",
-    element: (
-      <PrivateRoute>
-        <TestCardDetails />
-      </PrivateRoute>
-    ),
-    loader: ({ params }) => fetch(`http://localhost:7000/details/${params.id}`),
   },
 ]);
 

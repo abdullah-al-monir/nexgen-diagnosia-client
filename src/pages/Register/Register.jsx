@@ -123,7 +123,7 @@ const Register = () => {
                       enqueueSnackbar(`Registration successful`, {
                         variant: "success",autoHideDuration: 1500,
                       });
-                      navigate("/");
+                      navigate("/dashboard/profile");
                       data = new FormData();
                     }
                   })

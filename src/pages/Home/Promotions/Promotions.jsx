@@ -12,7 +12,7 @@ const Promotions = () => {
     },
   });
   return (
-    <Box>
+    <Box sx={{p:5}}>
       <Typography
         variant="h3"
         sx={{ my: 5, color: "#082f63", textTransform: "uppercase" }}

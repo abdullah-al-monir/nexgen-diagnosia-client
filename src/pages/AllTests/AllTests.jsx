@@ -1,5 +1,4 @@
 import { Grid, Container, Pagination, Typography } from "@mui/material";
-import useTests from "../../hooks/useTests";
 import TestCard from "../../components/DashboardList/TestCard";
 import { useEffect, useState } from "react";
 import BeatLoader from "react-spinners/BeatLoader";

@@ -14,7 +14,7 @@ import {
 import dayjs from "dayjs";
 import { enqueueSnackbar } from "notistack";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import ReportUpload from "../../../../components/ReportUpload/ReportUpload";
 const Reservation = () => {
   const axiosSecure = useAxiosSecure();
@@ -65,16 +65,6 @@ const Reservation = () => {
       }
     });
   };
-
-  // const handleAddReport = (id, selectedFile) => {
-  //   console.log(`File selected for appointment ID ${id}:`);
-  //   // Update the reportFiles state for this appointment
-  //   setReportFiles({
-  //     ...reportFiles,
-  //     [id]: selectedFile,
-  //   });
-  //   console.log(reportFiles);
-  // };
 
   return (
     <Box
@@ -168,6 +158,7 @@ const Reservation = () => {
                           testName: appointment.testName,
                           status: appointment.status,
                           email: appointment.email,
+                          price: appointment.price,
                         }}
                       />
                     </>

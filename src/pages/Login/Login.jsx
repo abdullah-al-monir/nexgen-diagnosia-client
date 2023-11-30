@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-// import Swal from "sweetalert2";
-// import useDocumentTitle from "../../hooks/useTitle";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
@@ -33,7 +31,7 @@ const Login = () => {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
+  const from = location.state?.from?.pathname || "/dashboard/profile";
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);

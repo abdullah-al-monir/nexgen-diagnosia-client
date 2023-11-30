@@ -13,8 +13,7 @@ import CommentIcon from "@mui/icons-material/Comment";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 
 const PromotionCard = ({ card }) => {
-  const { id, title, description, image, startDate, endDate, like, comment } =
-    card;
+  const { title, description, image, startDate, endDate, like, comment } = card;
   return (
     <Card
       style={{
@@ -22,7 +21,6 @@ const PromotionCard = ({ card }) => {
         flexDirection: "column",
         maxWidth: "lg",
         padding: "24px",
-        margin: "16px",
         overflow: "hidden",
         borderRadius: "8px",
         boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
@@ -58,7 +56,8 @@ const PromotionCard = ({ card }) => {
             color="textSecondary"
             style={{ marginTop: "8px" }}
           >
-            Starts from <strong>{startDate}</strong> to <strong>{endDate}</strong>
+            Starts from <strong>{startDate}</strong> to{" "}
+            <strong>{endDate}</strong>
           </Typography>
         </Grid>
         <Grid style={{ display: "flex", justifyContent: "space-between" }}>

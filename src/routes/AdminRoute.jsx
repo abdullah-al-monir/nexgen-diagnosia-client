@@ -7,21 +7,23 @@ const AdminRoute = ({ children }) => {
   const [admin, isLoading] = useAdmin();
   const location = useLocation();
   if (loading || isLoading) {
-    return  <div
-    style={{
-      height: "100vh",
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-    }}
-  >
-    <BeatLoader style={{ color: "#082f63" }} />
-  </div>;
+    return (
+      <div
+        style={{
+          height: "100vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <BeatLoader style={{ color: "#082f63" }} />
+      </div>
+    );
   }
   if (user && admin) {
     return children;
   }
-  return <Navigate to="/" state={{ from: location }} replace></Navigate>;
+  return <Navigate to="/login" state={{ from: location }} replace></Navigate>;
 };
 
 export default AdminRoute;

@@ -104,7 +104,7 @@ const Dashboard = () => {
         component="main"
         sx={{
           flexGrow: 1,
-          height: "100vh",
+          minHeight: "100vh",
           overflow: "auto",
         }}
       >

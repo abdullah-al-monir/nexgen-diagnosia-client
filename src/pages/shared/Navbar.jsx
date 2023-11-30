@@ -25,19 +25,24 @@ function Navbar() {
     logOut();
     navigate("/");
   };
-  const settings = [
-    { name: "Profile", link: "/dashboard/profile" },
-  ];
+  const settings = [{ name: "Profile", link: "/dashboard/profile" }];
   const pages = [
     { name: "Home", link: "/" },
     { name: "All Tests", link: "/allTests" },
-    {
-      name: `${!admin ? "Appointments" : "Dashboard"}`,
-      link: `${!admin ? "/dashboard/appointments" : "/dashboard/dashboard"}`,
-    },
+
     { name: "Blog", link: "/blog" },
     { name: "About Us", link: "/about" },
     { name: "Contact", link: "/contact" },
+    {
+      name: `${user ? (!admin ? "Appointments" : "Dashboard") : ""}`,
+      link: `${
+        user
+          ? !admin
+            ? "/dashboard/appointments"
+            : "/dashboard/dashboard"
+          : ""
+      }`,
+    },
   ];
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -71,8 +76,8 @@ function Navbar() {
           <Typography
             variant="h6"
             noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
+            component={Link}
+            to="/"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },

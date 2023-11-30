@@ -42,7 +42,17 @@ const AllBanners = () => {
       </div>
     );
   }
-  console.log(banners.map((b) => b.isActive));
+  const handleDeleteBanner = (id) => {
+    axiosSecure.delete(`/banner/${id}`).then((res) => {
+      if (res.data.deletedCount) {
+        refetch();
+        enqueueSnackbar(`Banner deleted successfully`, {
+          variant: "success",
+          autoHideDuration: 1500,
+        });
+      }
+    });
+  };
   return (
     <Box
       sx={{
@@ -64,6 +74,7 @@ const AllBanners = () => {
               <TableCell align="center">Coupon</TableCell>
               <TableCell align="center">Discount</TableCell>
               <TableCell align="center">Status</TableCell>
+              <TableCell align="center">Action</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -90,6 +101,22 @@ const AllBanners = () => {
                     }}
                   >
                     {banner.isActive === true ? "Active" : "Inactive"}
+                  </Button>
+                </TableCell>
+                <TableCell align="right">
+                  <Button
+                    size="small"
+                    variant="outlined"
+                    onClick={() => handleDeleteBanner(banner._id)}
+                    sx={{
+                      color: "red",
+                      borderColor: "red",
+                      "&:hover": {
+                        borderColor: "darkred",
+                      },
+                    }}
+                  >
+                    Delete
                   </Button>
                 </TableCell>
               </TableRow>

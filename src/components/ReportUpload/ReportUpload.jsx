@@ -6,13 +6,15 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { enqueueSnackbar } from "notistack";
 import useAppointments from "../../hooks/useAppointments";
 import BeatLoader from "react-spinners/BeatLoader";
+import dayjs from "dayjs";
 const ReportUpload = ({ report }) => {
   const [uploadStatus, setUploadStatus] = useState("");
   const [uploadedUrl, setUploadedUrl] = useState("");
   const axiosPublic = useAxiosPublic();
   const axiosSecure = useAxiosSecure();
+  const presentDate = dayjs();
   const [, isPending, refetch] = useAppointments();
-  const { id, testName, status, email } = report;
+  const { id, testName, status, email,price } = report;
   const onDrop = async (acceptedFiles) => {
     try {
       const formData = new FormData();
@@ -27,9 +29,11 @@ const ReportUpload = ({ report }) => {
         const postData = {
           id,
           testName,
-          status: status === "Delivered",
+          status: status === "delivered",
           email,
           pdfUrl: response.data.url,
+          delivery: presentDate,
+          price
         };
 
         const postDataResponse = await axiosSecure.post("/reports", postData);
