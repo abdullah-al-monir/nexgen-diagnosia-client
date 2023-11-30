@@ -28,7 +28,7 @@ const Routes = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
-    errorElement: <ErrorPage/>,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
@@ -70,13 +70,16 @@ const Routes = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`https://nexgen-diagnosia-server.vercel.app/details/${params.id}`),
+          fetch(
+            `https://nexgen-diagnosia-server.vercel.app/details/${params.id}`
+          ),
       },
     ],
   },
   {
     path: "dashboard",
     element: <Dashboard />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "profile",
@@ -166,7 +169,9 @@ const Routes = createBrowserRouter([
           </AdminRoute>
         ),
         loader: ({ params }) =>
-          fetch(`https://nexgen-diagnosia-server.vercel.app/details/${params.id}`),
+          fetch(
+            `https://nexgen-diagnosia-server.vercel.app/details/${params.id}`
+          ),
       },
     ],
   },

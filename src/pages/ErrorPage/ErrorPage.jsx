@@ -1,6 +1,6 @@
 import { Typography, Box, Button } from "@mui/material";
 import { Link } from "react-router-dom";
-
+import errorBg from "/errorPage.jpg";
 const ErrorPage = () => {
   return (
     <Box
@@ -10,19 +10,20 @@ const ErrorPage = () => {
         justifyContent: "center",
         alignItems: "center",
         height: "100vh",
+        backgroundImage: `url('${errorBg}')`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
       }}
     >
-      <Typography variant="h1" color="error" gutterBottom>
-        Error 404
-      </Typography>
-      <Typography variant="h4" color="textSecondary" gutterBottom>
+      <Typography fontWeight={700} variant="h1" color="red" gutterBottom>
         Oops! Page not found
       </Typography>
-      <Typography variant="body1" color="textSecondary" align="center">
-        The page you are looking for might have been removed or is temporarily
-        unavailable.
-      </Typography>
-      <Button LinkComponent={Link} to="/" variant="contained" color="primary">
+      <Button
+        sx={{ backgroundColor: "#082f63", color: "greenyellow" }}
+        LinkComponent={Link}
+        to="/"
+        variant="contained"
+      >
         Go to Homepage
       </Button>
     </Box>
