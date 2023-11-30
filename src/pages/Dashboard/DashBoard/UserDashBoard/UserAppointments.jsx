@@ -89,7 +89,37 @@ const UserAppointments = () => {
                   {" "}
                   {dayjs(appointment.date).format("HH:mm")}
                 </TableCell>
-                <TableCell align="center">{appointment.status}</TableCell>
+                <TableCell align="center">
+                  {appointment.status === "pending" ? (
+                    <Button
+                      disabled
+                      size="small"
+                      variant="contained"
+                      sx={{
+                        "&:disabled": {
+                          backgroundColor: "#082f63",
+                          color: "orange",
+                        },
+                      }}
+                    >
+                      Pending
+                    </Button>
+                  ) : (
+                    <Button
+                      disabled
+                      size="small"
+                      variant="contained"
+                      sx={{
+                        "&:disabled": {
+                          backgroundColor: "#082f63",
+                          color: "#75E7B6",
+                        },
+                      }}
+                    >
+                      Delivered
+                    </Button>
+                  )}
+                </TableCell>
                 <TableCell align="right">
                   <Button
                     size="small"

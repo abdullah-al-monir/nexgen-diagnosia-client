@@ -103,11 +103,6 @@ export default function CustomizedDialogs({ userEmail, open, setOpen }) {
             <strong>Status:</strong> {status}
           </Typography>
         </DialogContent>
-        {/* <DialogActions>
-          <Button autoFocus onClick={handleClose}>
-            Save changes
-          </Button>
-        </DialogActions> */}
       </UserDialog>
     </>
   );

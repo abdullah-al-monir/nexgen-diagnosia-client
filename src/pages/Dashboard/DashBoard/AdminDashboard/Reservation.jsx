@@ -16,12 +16,16 @@ import { enqueueSnackbar } from "notistack";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import { useEffect, useState } from "react";
 import ReportUpload from "../../../../components/ReportUpload/ReportUpload";
+import BeatLoader from "react-spinners/BeatLoader";
 const Reservation = () => {
   const axiosSecure = useAxiosSecure();
   const [search, setSearch] = useState("");
   const [appointments, setAppointments] = useState([]);
+  const [loadingA, setLoadingA] = useState(false);
   useEffect(() => {
+    setLoadingA(true);
     axiosSecure.get(`/appointments`).then((res) => {
+      setLoadingA(false);
       setAppointments(res.data);
       window.scrollTo(0, 0);
     });
@@ -47,7 +51,6 @@ const Reservation = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-
     axiosSecure.get(`/appointments?search=${search}`).then((res) => {
       setAppointments(res.data);
     });
@@ -65,7 +68,20 @@ const Reservation = () => {
       }
     });
   };
-
+  if (loadingA) {
+    return (
+      <div
+        style={{
+          height: "100vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <BeatLoader style={{ color: "#082f63" }} />
+      </div>
+    );
+  }
   return (
     <Box
       sx={{

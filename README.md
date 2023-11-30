@@ -17,6 +17,8 @@ There are 7 pages in the navbar (Home,All Tests, Contact, Blog, About Us,Dashboa
 4. About Us : In this page there are some details info about diagnostic center like team members, Aim etc.
 5. Contact: In this page there is a contact form with an image.
 
+- Test details page : In this page , after clicking the book button user can see a modal where he/she can see her/his name and email with the selected tests price. here she/she can apply promocode which is shown in the banner. If promocode applied then discount prize will be given . Then if he/she click pay button then there is a payment option by card . Here, she/he can pay with required card info. After paying he/she will be redirected to the appointments page.
+
 ## User Dashboard:
 
     1. User Profile: After login users are redirected to this link . Here all info about the logged in user is visible and he/she can change any info of her/his profile excluding email.
@@ -32,8 +34,6 @@ There are 7 pages in the navbar (Home,All Tests, Contact, Blog, About Us,Dashboa
     5. Add Banner : In this page admin can create a homepage banner by filling up the form with required info .
     6. All Banners : In this page , admin can see all banners info in a table .Here he/she can select active banner and also can delete any banner from the table.
     7. Reservations: In this page admin can see all appointments booked by a user.Admin can cancel any appointment and also can upload report for the selected test. After uploading the report the status of the tests will be delivered and user can see the result in the report page.
-
-    * Test details page : In this page , after clicking the book button user can see a modal where he/she can see her/his name and email with the selected tests price. here she/she can apply promocode which is shown in the banner. If promocode applied then discount prize will be given . Then if he/she click pay button then there is a payment option by card . Here, she/he can pay with required card info. After paying he/she will be redirected to the appointments page.
 
 ## Live Link : https://nexgen-diagnosia.web.app/
 

@@ -68,7 +68,7 @@ const Routes = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:7000/details/${params.id}`),
+          fetch(`https://nexgen-diagnosia-server.vercel.app/details/${params.id}`),
       },
     ],
   },
@@ -164,7 +164,7 @@ const Routes = createBrowserRouter([
           </AdminRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:7000/details/${params.id}`),
+          fetch(`https://nexgen-diagnosia-server.vercel.app/details/${params.id}`),
       },
     ],
   },

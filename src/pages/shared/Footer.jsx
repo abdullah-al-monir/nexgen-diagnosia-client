@@ -28,9 +28,9 @@ function Footer() {
       <Container component="main">
         {footerDatas.map((footerData) => (
           <Box key={footerData._id}>
-            <Box sx={{ display: "flex", justifyContent: "space-between"}}>
+            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
               <Box>
-                <Box sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}>
+                <Box sx={{ display: "flex", mr: 1 }}>
                   <img style={{ height: "30px" }} src={logo} alt="" />
                   <Typography
                     variant="h6"
@@ -39,7 +39,6 @@ function Footer() {
                     href="#app-bar-with-responsive-menu"
                     sx={{
                       ml: 1,
-                      display: { xs: "none", md: "flex" },
                       fontFamily: "monospace",
                       fontWeight: 900,
                       color: "#082f63",

@@ -11,8 +11,8 @@ import DashboardPeiChart from "../../../../components/DashboardList/DashboardPei
 const AdminHome = () => {
   const [users] = useGetUsers();
   const [tests] = useTests();
-  const revenue = "10,000";
-  const deliveredReports = 300;
+  const revenue = 5000;
+  const deliveredReports = 100;
 
   return (
     <Box

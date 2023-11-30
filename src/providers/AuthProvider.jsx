@@ -48,8 +48,6 @@ const AuthProvider = ({ children }) => {
             if (res.data) {
               setLoading(false);
             }
-
-            console.log("token response", res.data);
           });
       } else {
         axiosPublic
@@ -60,7 +58,6 @@ const AuthProvider = ({ children }) => {
             if (res.data) {
               setLoading(false);
             }
-            console.log(res.data);
           });
       }
     });

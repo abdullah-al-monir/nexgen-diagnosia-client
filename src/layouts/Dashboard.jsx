@@ -71,7 +71,6 @@ const Dashboard = () => {
         sx={{
           position: { xs: "absolute", md: "static" },
           minHeight: "100vh",
-          backgroundColor: "#75E7B6",
         }}
         open={open}
       >
@@ -142,7 +141,6 @@ const Dashboard = () => {
             pb: 4,
             pl: { xs: 8, md: "28px" },
             minHeight: "calc(100vh - 88px)",
-            backgroundColor: "green",
           }}
         >
           <Outlet />

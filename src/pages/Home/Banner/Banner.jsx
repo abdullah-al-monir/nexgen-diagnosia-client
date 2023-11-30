@@ -84,8 +84,8 @@ const Banner = () => {
             <Box
               sx={{
                 position: "relative",
-                width: "300px",
-                height: "200px",
+                width: {md:"300px", xs: "200px"},
+                height: {md:"200px", xs: "150px"},
                 backgroundColor: "greenyellow",
                 clipPath: "polygon(0 0, 100% 0, 100% 90%, 0% 100%)",
                 display: "flex",

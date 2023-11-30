@@ -1,6 +1,6 @@
 import axios from "axios";
 const axiosSecure = axios.create({
-  baseURL: "http://localhost:7000",
+  baseURL: "https://nexgen-diagnosia-server.vercel.app",
   withCredentials: true,
 });
 const useAxiosSecure = () => {

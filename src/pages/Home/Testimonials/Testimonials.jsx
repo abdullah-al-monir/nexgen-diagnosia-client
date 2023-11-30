@@ -45,8 +45,7 @@ const Testimonials = () => {
   return (
     <Box maxWidth="1280px" sx={{ m: "0px auto 50px auto", p: 5 }}>
       <Typography
-        variant="h3"
-        sx={{ my: 5, color: "#082f63", textTransform: "uppercase" }}
+        sx={{ my: 5, color: "#082f63", textTransform: "uppercase", fontSize: {md:"45px",xs: "40px"} }}
         align="center"
       >
         Testimonials

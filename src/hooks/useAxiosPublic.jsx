@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const axiosPublic = axios.create({ baseURL: "http://localhost:7000" });
+const axiosPublic = axios.create({ baseURL: "https://nexgen-diagnosia-server.vercel.app" });
 const useAxiosPublic = () => {
   return axiosPublic;
 };

@@ -40,7 +40,6 @@ export default function PaymentModal({ modalData, open, setOpen }) {
     setCoupon(null);
     setOpen(false);
   };
-  console.log(banner.couponCode);
   const handleApplyCoupon = () => {
     console.log(coupon);
     if (banner.couponCode !== coupon) {
