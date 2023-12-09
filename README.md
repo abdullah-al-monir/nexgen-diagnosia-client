@@ -1,5 +1,8 @@
 My website name is "Nexgen Diagnosia". Which a diagnostic center's website. Here users can book there appointments, users can payment and also can download report virtually.
 
+# Technologies
+  ReactJs, Material UI, Firebase, MongoDB, ExpressJs, NodeJs, JWT, Stripe Js, and Tanstack Query.
+
 # Features
 
 There are 7 pages in the navbar (Home,All Tests, Contact, Blog, About Us,Dashboard / Appointment, Login)
