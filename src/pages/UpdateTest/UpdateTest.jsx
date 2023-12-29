@@ -18,7 +18,6 @@ const dp_hosting_api = `https://api.imgbb.com/1/upload?key=${dp_hosting_key}`;
 const UpdateTest = () => {
   const currentTest = useLoaderData();
 
-
   const {
     testName,
     imageURL,
@@ -64,12 +63,12 @@ const UpdateTest = () => {
               testName,
               details,
               shortDetails,
-              slots,
-              price,
+              slots: parseInt(slots),
+              price: parseInt(price),
               date: formattedDate,
               imageURL: image,
-              slotsAvailable: slots - booked,
-              booked,
+              slotsAvailable: parseInt(slots - booked),
+              booked: parseInt(booked),
               _id,
             };
             axiosSecure
@@ -92,15 +91,15 @@ const UpdateTest = () => {
         testName,
         details,
         shortDetails,
-        slots,
-        price,
-        date: formattedDate,
+        slots: parseInt(slots),
+        price: parseInt(price),
         imageURL,
-        slotsAvailable: slots,
-        booked,
+        date: formattedDate,
+        slotsAvailable: parseInt(slots - booked),
+        booked: parseInt(booked),
         _id,
       };
-      
+
       axiosSecure
         .put("/tests", updatedTestData)
         .then((res) => {

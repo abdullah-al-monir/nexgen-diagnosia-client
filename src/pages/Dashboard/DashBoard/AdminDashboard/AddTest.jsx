@@ -47,10 +47,10 @@ const AddTest = () => {
             details,
             shortDetails,
             slots,
-            price,
+            price: parseInt(price),
             date: formattedDate,
             imageURL: image,
-            slotsAvailable: slots,
+            slotsAvailable: parseInt(slots),
             booked: 0,
           };
           axiosSecure
