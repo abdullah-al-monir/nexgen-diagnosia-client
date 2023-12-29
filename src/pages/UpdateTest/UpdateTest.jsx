@@ -17,7 +17,8 @@ const dp_hosting_key = import.meta.env.VITE_DP_HOSTING_KEY;
 const dp_hosting_api = `https://api.imgbb.com/1/upload?key=${dp_hosting_key}`;
 const UpdateTest = () => {
   const currentTest = useLoaderData();
-  console.log(currentTest);
+
+
   const {
     testName,
     imageURL,
@@ -96,9 +97,10 @@ const UpdateTest = () => {
         date: formattedDate,
         imageURL,
         slotsAvailable: slots,
-        booked: 0,
+        booked,
         _id,
       };
+      
       axiosSecure
         .put("/tests", updatedTestData)
         .then((res) => {

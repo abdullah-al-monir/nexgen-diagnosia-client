@@ -11,7 +11,6 @@ import {
 import CloseIcon from "@mui/icons-material/Close";
 import { styled } from "@mui/material/styles";
 import BeatLoader from "react-spinners/BeatLoader";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useActiveBanner from "../../hooks/useActiveBanner";
 import { useState } from "react";
 import { enqueueSnackbar } from "notistack";
