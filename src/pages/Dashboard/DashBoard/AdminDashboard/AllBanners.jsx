@@ -66,7 +66,7 @@ const AllBanners = () => {
         Homepage Banners
       </Typography>
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <Table sx={{ minWidth: 650, my: 5 }} aria-label="simple table">
           <TableHead style={{ backgroundColor: "#75E7B6" }}>
             <TableRow>
               <TableCell>Title</TableCell>
